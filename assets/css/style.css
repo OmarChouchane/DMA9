@@ -399,6 +399,39 @@ button:hover{
     background-color: coral !important;
 }
 
+/*food for the shop*/
+.food {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+.food div{
+    
+    margin : 10px ;
+    text-align: center;
+    justify-content: center;
+}
+  
+ 
+
+  
+  .product {
+    background: white; /* Default background color */
+    padding: 30px; /* Increase space between products */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+    border-radius: 10px;
+    border: 1px solid transparent; /* Add a transparent border */
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
+
+  }
+  
+  .product:hover {
+    /*background-color :#fbdec7;*/
+     /* Change background color when hovered */
+    border-color: rgba(0, 0, 0, 0.1); /* Change border color on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a shadow on hover */
+  }
 
 
 
