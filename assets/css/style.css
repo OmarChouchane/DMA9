@@ -247,6 +247,93 @@ footer p{
   }
   
   .product:hover {
-    background-color: grey; /* Change background color when hovered */
+    background-color: grey ;
+     /* Change background color when hovered */
   }
   
+  .cart table{
+    width : 100% ; 
+    border-collapse: collapse;
+    
+}
+.cart .product-info{
+    display:flex ; 
+    flex-wrap: wrap;
+
+}
+.cart th{
+    text-align : left ; 
+    padding : 5px 10px ; 
+    color  : white ; 
+    background-color : black ;
+}
+.cart td{
+    padding : 10px 20px ;
+
+}
+.cart td img{
+    width : 80px ; 
+    height : 80px ;
+    margin-right : 10px ; 
+
+}
+.cart td input {
+    width : 40px : 
+    height : 30px ;
+    padding : 5px ;
+
+}
+.cart td a{
+    color : rgb(64, 61, 61)  ;
+}
+.cart .remove-btn{
+    color : rgb(64, 61, 61)  ;
+    text-decoration: none;
+    font-size: 14px;
+    background-color: white;
+    border: none;
+}
+.cart .edit-btn{
+    text-decoration: none;
+    font-size: 15px;
+    background-color: white;
+    border: none;
+    color:black
+    
+
+}
+.cart .product-info p{
+    margin : 3px ;
+
+}
+.cart-total{
+    display : flex;
+    justify-content: flex-end;
+}
+.cart-total table{
+    width : 100% ;
+    max-width : 500px ;
+    border-top : 3px solid  white;
+
+}
+td:last-child{
+    text-align: right;
+
+}
+th:last-child{
+    text-align: right;
+
+}
+.checkout-container{
+    display : flex ; 
+    justify-content: flex-end;
+
+}
+
+.checkout-btn {
+    display : flex ; 
+    justify-content  : flex-end ; 
+    color : black  ; 
+    background-color: rgb(222, 126, 16);
+
+}
