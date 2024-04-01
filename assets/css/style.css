@@ -129,9 +129,7 @@ h6{
 #home{
     padding-top: 100px !important;
 }
-.logo img{
-    width : 20% ;
-    float : left ;
-    margin-left : 10 px ;
-    
+.logo{
+    width: 100.8px;
+    height: 43.2px;
 }
