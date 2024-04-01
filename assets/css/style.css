@@ -133,3 +133,27 @@ h6{
     width: 100.8px;
     height: 43.2px;
 }
+button{
+    padding: 13px 30px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 7px;
+    transition: 0.4s ease;  
+}
+.button{
+    border: none;
+    background-color: black !important;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+.button:hover{
+    background-color: coral !important;
+}
