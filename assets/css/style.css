@@ -273,6 +273,35 @@ button:hover{
     background-color: coral !important;
 }
 
+/*food for the shop*/
+.food {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+.food div{
+    
+    margin : 10px ;
+    text-align: center;
+    justify-content: center;
+}
+  
+ 
+
+  
+  .product {
+    background: white; /* Default background color */
+    padding: 30px; /* Increase space between products */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+    border-radius: 10px;
+
+  }
+  
+  .product:hover {
+    background-color: grey ;
+     /* Change background color when hovered */
+  }
 
 /* New */
 
