@@ -1,56 +1,75 @@
 <?php
 
+
 session_start();
-
-
-/*
-    not paid
-    shipped
-    delivered
-*/ 
 
 
 include 'server/connection.php';
 
-if(isset($_POST['order_details_btn']) && isset($_POST['order_id'])){
-
-    $order_id = $_POST['order_id'];
-    $order_status = $_POST['order_status'];
-
-    $stmt = $conn->prepare("SELECT * FROM order_items WHERE order_id = ?");
-
-    $stmt->bind_param('i',$order_id);
-
-    $stmt->execute();
-
-    $order_details = $stmt->get_result();
-
-    $total_order_price = calculateTotalOrderPrice($order_details);
 
 
-}else{
+//if user is already logged in
+if(isset($_SESSION['logged_in'])){
+
     header('location: account.php');
     exit();
+
 }
 
 
-function calculateTotalOrderPrice($order_details){
 
-    $total = 0;
+// if user is not logged in
+if(isset($_POST['login_btn'])){
 
-    foreach($order_details as $row){
 
-        $price = $row['product_price'];
-        $quantity = $row['product_quantity'];
+    $email = $_POST['email'];
+    $password = md5($_POST['password']);
 
-        $total += ($price * $quantity);
+
+    // retrieve user info from the database
+    $stmt = $conn->prepare("SELECT user_id,user_name,user_email,user_password FROM users WHERE user_email = ? AND user_password = ? LIMIT 1"); 
+    $stmt->bind_param('ss', $email,$password);    
+
+
+    // If the query is successful
+    if($stmt->execute()){ 
+
+        $stmt->bind_result($user_id, $user_name, $user_email, $user_password);
+        $stmt->store_result();
+
+
+        // if account exists
+        if($stmt->num_rows() == 1){
+
+            $stmt->fetch();
+
+            $_SESSION['user_id'] = $user_id;
+            $_SESSION['user_name'] = $user_name;
+            $_SESSION['user_email'] = $user_email;
+            $_SESSION['logged_in'] = true;
+
+            header('location: account.php?login=You logged in successfully');
+
+
+        
+        // if account does not exist
+        }else{
+
+            header('location: login.php?error=invalid email or password');
+
+        }
+
+
+    // If the query is not successful
+    }else{
+
+        header('location: login.php?error=something went wrong, try again later');
 
     }
 
-    return $total;
+
 
 }
-
 
 
 ?>
@@ -62,56 +81,35 @@ function calculateTotalOrderPrice($order_details){
 
 
 
-
-    <!--Orders Details-->
-    <section id="orders" class="orders container my-5 py-5" class="">
-        <div class="container text-center mt-5">
-            <h2 class="font-weight-bold">Order Details</h2>
+    <!--Login-->
+    <section class="my-5 py-5">
+        <div class="container text-center mt-3 pt-5">
+            <h2 class="form-weihggt-bold">Login</h2>
             <hr class="mx-auto">
         </div>
-
-        <table class="mt-5 pt-5 mx-auto">
-            <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-            </tr>
-
-
-            <?php foreach($order_details as $row){?>
-
-            <tr>
-                <td>
-                    <div class="product-info">
-                        <img src="/assets/imgs/<?php echo $row['product_image'];?>" alt="">
-                        <div>
-                            <p class="mt-3"><?php echo $row['product_name'];?></p>
-                        </div>
-                    </div>
-                </td>
-
-                <td>$<span><?php echo $row['product_price'];?></span></td>
-                <td><span class="product-quantity"><?php echo $row['product_quantity'];?></span></td>
-
-            </tr>
-
-            <?php }?>
-
-        </table>
-
-
-        <?php if($order_status == "not paid"){?>
-            <form style="float: right;" action="payement.php" method="POST">
-                <input type="hidden" name="total_order_price" value="<?php echo $total_order_price;?>">
-                <input type="hidden" name="order_status" value="<?php echo $order_status;?>">
-                <input class="btn order-details-btn" type="submit" name="order_pay_btn" value="Pay Now">
+        <div class="mx-auto container">
+            <form id="login-form" action="login.php" method="POST">
+                <?php if(isset($_GET['error'])){?>
+                    <p style="color: red;"><?php echo $_GET['error']; ?></p>
+                <?php } ?>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" id="login-email" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" id="login-password" name="password" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn" id="login-btn" value="Login" name="login_btn">
+                </div>
+                <div class="form-group">
+                    <a id="register-url" class="btn" href="register.php">Don't have an account ? Register</a>
+                </div>
             </form>
-        <?php } ?>
-
+        </div>
     </section>
 
 
-
-
-
+        
 <?php include('layouts/footer.php'); ?>
