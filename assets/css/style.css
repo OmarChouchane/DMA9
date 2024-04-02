@@ -50,6 +50,7 @@ h6{
 
 
 
+
 /*-----Navbar-----*/
 
 
@@ -64,7 +65,7 @@ h6{
 
 .navbar-light .navbar-nav .nav-link {
     padding: 0 15px;
-    columns: #910;
+    columns: #c87a06;
     transition: 0.4s ease;
 }
 
@@ -73,7 +74,7 @@ h6{
 .navbar-light .navbar-nav .nav-link:active
 .navbar a:hover,.navbar i:hover
 {
-    color: coral;
+    color: #c87a06;
 }
 
 .navbar i{
@@ -95,21 +96,96 @@ h6{
 }
 
 
+.navbar-light .navbar-nav .nav-link {
+    padding: 0 15px;
+    columns: #c87a06;
+    transition: 0.4s ease;
+    text-decoration: none; /* Add this line to remove default underline */
+    position: relative; /* Add this line to enable absolute positioning for the underline */
+}
+
+.navbar-light .navbar-nav .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* Adjust the position of the underline as needed */
+    width: 0;
+    height: 2px; /* Adjust the height of the underline as needed */
+    background-color: #c87a06;
+    transition: width 0.4s ease; /* Add this line to animate the width */
+}
+
+.navbar-light .navbar-nav .nav-link:hover::after,
+.navbar a:hover::after,
+.navbar-light .navbar-nav .nav-link:active::after,
+.navbar a:hover::after,
+.navbar i:hover::after {
+    width: 100%; /* Set the width to 100% to make the underline appear from left to right */
+}
+
+
+
+
+
+.scrolled {
+    background-color: #fae5d488 !important;
+    background-image: linear-gradient(45deg, #fae5d4 50%);
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 20px 20px;
+    transition: 0.4s ease;
+}
+
+.scrolled:hover {
+    background-color: #fdebdcbe !important;
+    background-image: linear-gradient(45deg, #fae5d4 50%);
+}
+
+
 @media only screen and (max-width:990px){
+    .navbar .nav-buttons{
+        background-color: #fae5d488; /* Adjust the color and opacity as needed */
+        background-image: linear-gradient(45deg, #fae5d4 50%); /* Adjust the color stops as needed */
+        backdrop-filter: blur(10px); /* Adjust the blur radius as needed */
+        border-radius: 10px;
+        font-size: 1.4rem;
+    }
     .nav-buttons{
         margin: 10px;
     }
 
     .nav-buttons ul{
         margin: 1rem;
-        justify-content: flex-start;
-        align-items: flex-start;
-        text-align: left;
+        text-align: center;
     }
 
-    .nav-buttons ul .fa{
-        margin: 20px 5px 10px 20px;
+    .nav-buttons ul li{
+        padding-top: 30px;
     }
+
+    .nav-buttons ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nav-buttons ul .fa {
+       padding: 20px;
+    }
+
+    .nav-buttons ul li i{
+        color: black;
+        font-size: 1.2rem !important;
+        font-weight: 500;
+    }
+
+    .navbar .icons{
+        padding: 0 !important;
+    }
+
+    .nav-item.icons a i {
+        font-size: 30px !important;
+    }
+    
 }
 
 
