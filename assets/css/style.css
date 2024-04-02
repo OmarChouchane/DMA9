@@ -47,7 +47,7 @@ h6{
 
 .navbar{
     font-size: 16px;
-    padding-bottom: 1.2rem !important;
+    padding-bottom: 0.9rem !important;
     padding-top: 1.2rem !important;
     top: 0;
     left: 0;
@@ -69,7 +69,8 @@ h6{
 .navbar-light .navbar-nav .nav-link:active
 .navbar a:hover,.navbar i:hover
 {
-    color: coral;
+    font-size: 19px;
+    color: #43250dfc;
 }
 
 .navbar i{
@@ -137,6 +138,7 @@ h6{
     background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
+    position: relative;
 }
 
 
