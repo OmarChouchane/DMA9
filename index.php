@@ -195,7 +195,7 @@ include('layouts/header.php');
                                         <i class="bi bi-stopwatch icon-feature text-gradient d-block mb-3"></i>
 
                                         <h3 class="font-alt">Sor3a</h3>
-                                        <p class="text-muted mb-0"><?php echo $row['product_description']; ?></p>
+                                        <p class="text-muted mb-0">****</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-5" data-aos="fade-left" data-aos-duration="1000">
