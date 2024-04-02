@@ -2,6 +2,7 @@
 
 include "server/connection.php";
 
+session_start(); 
 
 
 
