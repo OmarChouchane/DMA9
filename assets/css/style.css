@@ -45,6 +45,15 @@ h6{
 
 
 
+
+
+
+
+
+/*-----Navbar-----*/
+
+
+
 .navbar{
     font-size: 16px;
     padding-bottom: 1.2rem !important;
@@ -125,8 +134,13 @@ h6{
 
 
 
+
+/*-----Page Background-----*/
+
+
+
 #banner-bg {
-    background-image: url("/assets/imgs/back9.png");
+    background-image: url("/assets/imgs/back10.png");
     width: 100%;
     height: 100%;
     background-size: cover;
@@ -138,9 +152,23 @@ h6{
 
 
 
+@media only screen and (max-width:990px){
+    #banner-bg {
+        width: 100vw; /* Use viewport width to take up the entire width */
+        background-image: url("/assets/imgs/back-ph.png");
+        background-size: cover;
+        background-position: top;
+        background-repeat: no-repeat;
+    }
+}
 
 
 
+
+
+
+
+/*-----Upper-----*/
 
 
 
@@ -221,6 +249,8 @@ h6{
 
 
 
+
+/*-----Popular-----*/
 
   
 
@@ -327,6 +357,89 @@ h6{
 
 
 
+.icon-feature {
+    font-size: 4rem;
+  }
+
+
+
+
+
+
+
+
+
+.home-products .card-image {
+    height: 60%;
+    position: relative;
+    overflow: hidden;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: -9rem;
+    border-radius: 6px;
+    
+}
+
+
+
+
+.card{
+
+    transition: all 0.4s ease;
+    cursor: pointer;
+    
+
+  }
+    
+
+
+.card:hover{
+
+    box-shadow: 5px 6px 6px 2px rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+}
+
+.card:hover .card-image img{
+    transform: scale(1.1) rotate(5deg);
+}
+
+
+.card .card-image .card-caption h4{
+
+    font-weight: 700 !important;
+    font-size: 1.5rem;
+}
+
+
+.card .card-image button{
+    background-color: transparent;
+    color: black;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 7px 20px;
+    border-radius: 10px;
+    border-color: #fb774b;
+    transition: 0.4s ease;
+}
+
+.card .card-image button:hover{
+    background-color: #fb774b !important;
+    border-color: #fb774b;
+    box-shadow: 0 0 5px 7px rgba(0, 0, 0, 0.05);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -414,29 +527,6 @@ button:hover{
 }
   
  
-
-  
-  .product {
-    background: white; /* Default background color */
-    padding: 30px; /* Increase space between products */
-    transition: background-color 0.3s ease; /* Smooth transition for background color */
-    border-radius: 10px;
-    border: 1px solid transparent; /* Add a transparent border */
-    transition: border-color 0.3s ease; /* Smooth transition for border color */
-
-  }
-  
-  .product:hover {
-    /*background-color :#fbdec7;*/
-     /* Change background color when hovered */
-    border-color: rgba(0, 0, 0, 0.1); /* Change border color on hover */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a shadow on hover */
-  }
-
-
-
-
-
 
 
 
@@ -553,6 +643,44 @@ hr{
     font-size: 0.9rem;
     color: goldenrod;
 }
+
+
+
+
+
+
+
+
+
+
+/*-----Product hover-----*/
+
+  
+  .product {
+    background: white; /* Default background color */
+    padding: 30px; /* Increase space between products */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+    border-radius: 10px;
+    border: 1px solid transparent; /* Add a transparent border */
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
+
+  }
+  
+  .product:hover {
+    /*background-color :#fbdec7;*/
+     /* Change background color when hovered */
+    border-color: rgba(0, 0, 0, 0.1); /* Change border color on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a shadow on hover */
+  }
+
+
+
+
+
+
+
+
+
 
 
 
