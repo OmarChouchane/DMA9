@@ -43,7 +43,7 @@
                     <a class="nav-link" href="#">Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.php">Contact Us</a>
+                    <a class="nav-link" href="contact.php">Contact</a>
                 </li>
                 <li class="nav-item icons"> 
                     <a href="cart.php"><i class="fa fa-shopping-cart">
@@ -51,9 +51,10 @@
                             echo "<span class='cart-quantity'>".$_SESSION['quantity']."</span>";
                         } ?>
                        
-                    </i></a>            
-                    <a href="account.php"><i class="fa fa-user"></i></a>
-                </li>
+                    </i></a></li> 
+
+                <li  class="nav-item icons"><a href="account.php"><i class="fa fa-user"></i></a></li>
+                
                 
                 </ul>
             </div>
