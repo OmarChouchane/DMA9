@@ -1,61 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/assets/css/fontawesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-
-
-    
-
-    <link rel="stylesheet" href="assets/css/style.css">
-    <title>DMA9</title>
-    <link rel="icon" href="/assets/imgs/dma9.-logo-square.png" type="image/x-icon">
-</head>
-<body>
-    
-
-
-        
-
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-3 fixed-top" id="navbar">
-            <div class="container">
-                <img class="logo" src="assets/imgs/back2.png">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse nav-buttons" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="shop.html">Shop</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact Us</a>
-                </li>
-                <li class="nav-item icons"> 
-                    <a href="cart.html"><i class="fa fa-shopping-cart">
-                       
-                    </i></a>            
-                    <a href="account.html"><i class="fa fa-user"></i></a>
-                </li>
-                
-                </ul>
-            </div>
-
-            </div>
-    </nav>
+<?php include('layouts/header.php'); ?>
 
 
 
@@ -83,42 +26,29 @@
     
             <div class="container my-5 pb-3 custom-container" data-aos="fade-up" data-aos-duration="1000">
                 <div class="row text-center">
-                    <div class="col-md-3" data-aos="zoom-in-up" data-aos-duration="1000">
+
+
+                <?php  include('server/get_featured_products.php');  ?>
+
+                <?php  while($row=$featured_products->fetch_assoc()){  ?>
+
+
+                    <div  onclick="window.location.href='<?php echo "single_product.php?product_id=".$row['product_id'];?>'"  class="col-md-3" data-aos="zoom-in-up" data-aos-duration="1000">
                         <div class="custom-box">
-                            <img src="assets/imgs/featured1.png" alt="Image 1" class="img-fluid">
-                            <h4 class="mt-3">title</h4>
+                            <img src="assets/imgs/<?php echo $row['product_image']; ?>" alt="Image 1" class="img-fluid">
+                            <h5 class="mt-3"><?php echo $row['product_name']; ?></h5>
                             <p class="mt-3">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
-                            <button class="btn btn-primary mt-3 mb-4">See More</button>
+                            <h4 class ="p-price">$<?php echo $row['product_price']; ?></h4>
+                            <a href="<?php echo "single_product.php?product_id=".$row['product_id']; ?>"><button class="btn btn-primary mt-3 mb-4">BUY NOW</button></a>
                         </div>
                     </div>
-                    <div class="col-md-3" data-aos="zoom-in-up" data-aos-duration="1000">
-                        <div class="custom-box">
-                            <img src="assets/imgs/featured1.png" alt="Image 1" class="img-fluid">
-                            <h4 class="mt-3">title</h4>
-                            <p class="mt-3">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
-                            <button class="btn btn-primary mt-3 mb-4">See More</button>
-                        </div>
-                    </div>
-                    <div class="col-md-3" data-aos="zoom-in-up" data-aos-duration="1000">
-                        <div class="custom-box">
-                            <img src="assets/imgs/featured1.png" alt="Image 1" class="img-fluid">
-                            <h4 class="mt-3">title</h4>
-                            <p class="mt-3">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
-                            <button class="btn btn-primary mt-3 mb-4">See More</button>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-3" data-aos="zoom-in-up" data-aos-duration="1000">
-                        <div class="custom-box">
-                            <img src="assets/imgs/featured1.png" alt="Image 3" class="img-fluid">
-                            <h4 class="mt-3">title</h4>
-                            <p class="mt-3">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
-                            <button class="btn btn-primary mt-3 mb-4">See More</button>
-                        </div>
-                    </div>
+
+
+                <?php } ?>
                 </div>
             </div>
         </section>
+
     
     
     
@@ -128,49 +58,43 @@
         <section id="popular">
             <div class="cards mb-5  pb-5">
                 <div class="container text-center mt-5"  data-aos="fade-up" data-aos-duration="1000">
-                    <h3>The Most Popular</h3>
+                    <h3>Popular</h3>
                     <hr class="mx-auto">
                     <p>Here you can check out our featured products</p>
                 </div>
                 <div class="container">
                     <div class="row m-5 pt-5">
-                        <div class="card-body col-md-4" data-aos="zoom-in-up" data-aos-duration="1000">
+                    
+
+                    <?php  include('server/get_coats.php');  ?>
+
+                    <?php  while($row=$coats_products->fetch_assoc()){  ?>
+
+
+                        <div  onclick="window.location.href='<?php echo "single_product.php?product_id=".$row['product_id'];?>'"  class="card-body col-md-4" data-aos="zoom-in-up" data-aos-duration="1000">
                             <div class="card card-blog">
                                 <div class="card-image text-center">
-                                    <img class="img" src="assets/imgs/featured1.png">
-                                    <div class="card-caption text-center"><h4>Food Title</h4> </div>
+                                    <img class="img" src="assets/imgs/<?php echo $row['product_image']; ?>">
+                                    <div class="card-caption text-center"><h4><?php echo $row['product_name']; ?></h4> </div>
+                                    <h4 class ="p-price">$<?php echo $row['product_price']; ?></h4>
                                     <p class="mt-4">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
                                     <button class="btn btn-primary mt-3 mb-4">Order Now</button>
                                     
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body col-md-4" data-aos="zoom-in-up" data-aos-duration="1000">
-                            <div class="card card-blog">
-                                <div class="card-image text-center">
-                                    <img class="img" src="assets/imgs/featured1.png">
-                                    <div class="card-caption text-center"><h4>Food Title</h4> </div>
-                                    <p class="mt-4">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
-                                    <button class="btn btn-primary mt-3 mb-4">Order Now</button>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body col-md-4" data-aos="zoom-in-up" data-aos-duration="1000">
-                            <div class="card card-blog">
-                                <div class="card-image text-center">
-                                    <img class="img" src="assets/imgs/featured1.png">
-                                    <div class="card-caption text-center"><h4>Food Title</h4> </div>
-                                    <p class="mt-4">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
-                                    <button class="btn btn-primary mt-3 mb-4">Order Now</button>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+
+                    <?php }  ?>
+
+
+
                 </div>
             </div>
         </section>
+
+
+
 
 
 
@@ -178,55 +102,32 @@
         <section id="burgers" class="home-products">
             <div class="cards">
                 <div class="container text-center mt-5"  data-aos="fade-up" data-aos-duration="1000">
-                    <h3>The Most Popular</h3>
+                    <h3>Burger</h3>
                     <hr class="mx-auto">
                     <p>Here you can check out our featured products</p>
                 </div>
                 <div class="container">
                     <div class="row m-5 pt-5">
-                        <div class="card-body col-md-3" data-aos="zoom-in-up" data-aos-duration="1000">
+
+                    <?php  include('server/get_shoes.php');  ?>
+
+                    <?php  while($row=$shoes->fetch_assoc()){  ?>
+
+                        <div  onclick="window.location.href='<?php echo "single_product.php?product_id=".$row['product_id'];?>'"  class="card-body col-md-3" data-aos="zoom-in-up" data-aos-duration="1000">
                             <div class="card card-blog">
                                 <div class="card-image text-center">
-                                    <img class="img" src="assets/imgs/featured1.png">
-                                    <div class="card-caption text-center"><h4>Burger Title</h4> </div>
+                                    <img class="img" src="assets/imgs/<?php echo $row['product_image']; ?>">
+                                    <div class="card-caption text-center"><h4><?php echo $row['product_name']; ?></h4> </div>
+                                    <h4 class ="p-price">$<?php echo $row['product_price']; ?></h4>
                                     <p class="mt-4">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
-                                    <button class="btn btn-primary mt-3 mb-4">Order Now</button>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body col-md-3" data-aos="zoom-in-up" data-aos-duration="1000">
-                            <div class="card card-blog">
-                                <div class="card-image text-center">
-                                    <img class="img" src="assets/imgs/featured1.png">
-                                    <div class="card-caption text-center"><h4>Burger Title</h4> </div>
-                                    <p class="mt-4">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
-                                    <button class="btn btn-primary mt-3 mb-4">Order Now</button>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body col-md-3" data-aos="zoom-in-up" data-aos-duration="1000">
-                            <div class="card card-blog">
-                                <div class="card-image text-center">
-                                    <img class="img" src="assets/imgs/featured1.png">
-                                    <div class="card-caption text-center"><h4>Burger Title</h4> </div>
-                                    <p class="mt-4">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
-                                    <button class="btn btn-primary mt-3 mb-4">Order Now</button>
+
+                                    <a href="<?php echo "single_product.php?product_id=".$row['product_id']; ?>"><button class="btn btn-primary mt-3 mb-4">BUY NOW</button></a>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="card-body col-md-3" data-aos="zoom-in-up" data-aos-duration="1000">
-                            <div class="card card-blog">
-                                <div class="card-image text-center">
-                                    <img class="img" src="assets/imgs/featured1.png">
-                                    <div class="card-caption text-center"><h4>Burger Title</h4> </div>
-                                    <p class="mt-4">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
-                                    <button class="btn btn-primary mt-3 mb-4">Order Now</button>
-                                </div>
-                            </div>
-                        </div>
+                    <?php } ?>
+
                     </div>
                 </div>
             </div>
@@ -235,59 +136,36 @@
 
 
 
-        <!--Sandwiches-->
-        <section id="sandwiches" class="home-products">
+        <!--Fries-->
+        <section id="fries" class="home-products">
             <div class="cards">
                 <div class="container text-center mt-5"  data-aos="fade-up" data-aos-duration="1000">
-                    <h3>The Most Popular</h3>
+                    <h3>Fries</h3>
                     <hr class="mx-auto">
                     <p>Here you can check out our featured products</p>
                 </div>
                 <div class="container">
                     <div class="row m-5 pt-5">
-                        <div class="card-body col-md-3" data-aos="zoom-in-up" data-aos-duration="1000">
+
+                    <?php  include('server/get_watches.php');  ?>
+
+                    <?php  while($row=$watches->fetch_assoc()){  ?>
+
+                        <div  onclick="window.location.href='<?php echo "single_product.php?product_id=".$row['product_id'];?>'"  class="card-body col-md-3" data-aos="zoom-in-up" data-aos-duration="1000">
                             <div class="card card-blog">
                                 <div class="card-image text-center">
-                                    <img class="img" src="assets/imgs/featured1.png">
-                                    <div class="card-caption text-center"><h4>Sandwich Title</h4> </div>
+                                    <img class="img" src="assets/imgs/<?php echo $row['product_image']; ?>">
+                                    <div class="card-caption text-center"><h4><?php echo $row['product_name']; ?></h4> </div>
+                                    <h4 class ="p-price">$<?php echo $row['product_price']; ?></h4>
                                     <p class="mt-4">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
-                                    <button class="btn btn-primary mt-3 mb-4">Order Now</button>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body col-md-3" data-aos="zoom-in-up" data-aos-duration="1000">
-                            <div class="card card-blog">
-                                <div class="card-image text-center">
-                                    <img class="img" src="assets/imgs/featured1.png">
-                                    <div class="card-caption text-center"><h4>Sandwich Title</h4> </div>
-                                    <p class="mt-4">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
-                                    <button class="btn btn-primary mt-3 mb-4">Order Now</button>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body col-md-3" data-aos="zoom-in-up" data-aos-duration="1000">
-                            <div class="card card-blog">
-                                <div class="card-image text-center">
-                                    <img class="img" src="assets/imgs/featured1.png">
-                                    <div class="card-caption text-center"><h4>Sandwich Title</h4> </div>
-                                    <p class="mt-4">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
-                                    <button class="btn btn-primary mt-3 mb-4">Order Now</button>
+
+                                    <a href="<?php echo "single_product.php?product_id=".$row['product_id']; ?>"><button class="btn btn-primary mt-3 mb-4">BUY NOW</button></a>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="card-body col-md-3" data-aos="zoom-in-up" data-aos-duration="1000">
-                            <div class="card card-blog">
-                                <div class="card-image text-center">
-                                    <img class="img" src="assets/imgs/featured1.png">
-                                    <div class="card-caption text-center"><h4>Sandwich Title</h4> </div>
-                                    <p class="mt-4">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
-                                    <button class="btn btn-primary mt-3 mb-4">Order Now</button>
-                                </div>
-                            </div>
-                        </div>
+                    <?php } ?>
+
                     </div>
                 </div>
             </div>
