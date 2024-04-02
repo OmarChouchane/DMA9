@@ -65,24 +65,22 @@ if(isset($_POST['change_password'])){
 }
 
 
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
 
+    $stmt = $conn->prepare("SELECT * FROM orders WHERE user_id=?");
+    $stmt->bind_param('i', $user_id);
 
-//get orders
-
-$user_id = $_SESSION['user_id'];
-
-$stmt = $conn->prepare("SELECT * FROM orders WHERE user_id=?");
-
-$stmt->bind_param('i', $user_id);
-
-$stmt->execute();
-
-$orders = $stmt->get_result();
-
-
-
-
-
+    if ($stmt->execute()) {
+        $orders = $stmt->get_result();
+    } else {
+        header('location: account.php?error=error retrieving orders');
+        exit();
+    }
+} else {
+    header('location: login.php');
+    exit();
+}
 
 ?>
 
