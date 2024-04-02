@@ -199,20 +199,20 @@ if(isset($_GET['search'])){
                 <div class="col-12">
                     <p>Category</p>
                     <div class="form-check">
-                        <input class="form-check-input" value="shoes" type="radio" name="category" id="category_one" <?php if(isset($_GET['category']) && $category == 'shoes') echo 'checked'; ?>>
-                        <label class="form-check-label" for="flexRadioDefault1">Shoes</label>
+                        <input class="form-check-input" value="burger" type="radio" name="category" id="category_one" <?php if(isset($_GET['category']) && $category == 'burger') echo 'checked'; ?>>
+                        <label class="form-check-label" for="flexRadioDefault1">Burger</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" value="coats"  type="radio" name="category" id="category_two" <?php if(isset($_GET['category']) && $_GET['category'] == 'coats') echo 'checked'; ?>>
-                        <label class="form-check-label" for="flexRadioDefault2">Coats</label>
+                        <input class="form-check-input" value="sandwich"  type="radio" name="category" id="category_two" <?php if(isset($_GET['category']) && $_GET['category'] == 'sandwich') echo 'checked'; ?>>
+                        <label class="form-check-label" for="flexRadioDefault2">Sandwich</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" value="watches"  type="radio" name="category" id="category_three" <?php if(isset($_GET['category']) && $_GET['category'] == 'watches') echo 'checked'; ?>>
-                        <label class="form-check-label" for="flexRadioDefault3">Watches</label>
+                        <input class="form-check-input" value="fries"  type="radio" name="category" id="category_three" <?php if(isset($_GET['category']) && $_GET['category'] == 'fries') echo 'checked'; ?>>
+                        <label class="form-check-label" for="flexRadioDefault3">Fries</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" value="bags"  type="radio" name="category" id="category_four" <?php if(isset($_GET['category']) && $_GET['category'] == 'bags') echo 'checked'; ?>>
-                        <label class="form-check-label" for="flexRadioDefault4">Bags</label>
+                        <input class="form-check-input" value="pizza"  type="radio" name="category" id="category_four" <?php if(isset($_GET['category']) && $_GET['category'] == 'pizza') echo 'checked'; ?>>
+                        <label class="form-check-label" for="flexRadioDefault4">Pizza</label>
                     </div>
                 </div>
             </div>
