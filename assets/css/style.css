@@ -51,7 +51,12 @@ h6{
     padding-top: 1.2rem !important;
     top: 0;
     left: 0;
+    transition: background-color 0.5s ease;
 }
+
+.navbar.scrolled {
+    background-color:coral; 
+  }
 
 .navbar-light .navbar-nav .nav-link {
     padding: 0 15px;
