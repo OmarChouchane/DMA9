@@ -1138,6 +1138,35 @@ footer p{
 
 /* Orders */
 
+
+.order-detail .product-info{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.order-detail .product-quantity{
+    text-align: left !important;
+    float: left !important;
+}
+
+
+.order-detail td:nth-child(1){
+    text-align: left;
+    padding: 5px 10px;
+}
+
+.order-detail{
+    text-align: left;
+}
+
+.order-detail th{
+    text-align: left !important;
+    padding: 5px 20px;
+}
+
+
+
+
 .orders table{
     width: 100%;
     border-collapse: collapse;
