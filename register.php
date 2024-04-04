@@ -1,93 +1,74 @@
 <?php
 
-
 session_start();
-
-
 
 include 'server/connection.php';
 
+class RegistrationHandler {
+    private $conn;
 
-//if user is already logged in
-if(isset($_SESSION['logged_in'])){
-
-    header('location: account.php');
-    exit();
-
-}
-
-
-//if user is not logged in
-if(isset($_POST['register'])){
-
-
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirmPassword'];
-
-
-    // Check if passwords do not match
-    if($password != $confirmPassword){ 
-        header('location: register.php?error=passwords do not match');
+    public function __construct($conn) {
+        $this->conn = $conn;
     }
 
+    public function registerUser($name, $email, $password, $confirmPassword) {
+        // Check if passwords do not match
+        if ($password != $confirmPassword) {
+            header('location: register.php?error=passwords_do_not_match');
+            exit();
+        } elseif (strlen($password) < 6) {
+            // Check if password is less than 6 characters long
+            header('location: register.php?error=password_must_be_at_least_6_characters_long');
+            exit();
+        } else {
+            // Check if the email already exists in the database
+            $stmt1 = $this->conn->prepare("SELECT count(*) FROM users WHERE user_email = ?");
+            $stmt1->bind_param('s', $email);
+            $stmt1->execute();
+            $stmt1->bind_result($num_rows);
+            $stmt1->store_result();
+            $stmt1->fetch();
 
-    // Check if password is less than 6 characters long
-    else if(strlen($password) < 6){  
-        header('location: register.php?error=password must be at least 6 characters long');
-    }
+            // If the email already exists
+            if ($num_rows > 0) {
+                header('location: register.php?error=user_with_this_email_already_exists');
+                exit();
+            } else {
+                $hashed_password = md5($password);
+                $stmt = $this->conn->prepare("INSERT INTO users (user_name, user_email, user_password) VALUES (?,?,?)");
+                $stmt->bind_param('sss', $name, $email, $hashed_password);
 
-
-    // If there is no error
-    else{
-
-
-        // Check if the email already exists in the database
-        $stmt1 = $conn->prepare("SELECT count(*) FROM users WHERE user_email = ?"); 
-        $stmt1->bind_param('s', $email);
-        $stmt1->execute();
-        $stmt1->bind_result($num_rows);
-        $stmt1->store_result();
-        $stmt1->fetch();
-
-
-
-        // If the email already exists
-        if($num_rows > 0){
-            header('location: register.php?error=user with this email already exists');
-        }
-
-
-
-        // Insert user info into the users table
-        else{
-
-            $hashed_password = md5($password);
-
-            $stmt = $conn->prepare("INSERT INTO users (user_name, user_email, user_password) VALUES (?,?,?)");
-            $stmt->bind_param('sss', $name, $email, $hashed_password); 
-
-
-            // If the query is successful
-            if($stmt->execute()){ 
-                $user_id = $stmt->insert_id; // Get the auto-generated order ID
-                $_SESSION['user_id'] = $user_id;
-                $_SESSION['user_email'] = $email;
-                $_SESSION['user_name'] = $name;
-                $_SESSION['logged_in'] = true;
-                header('location: account.php?register=You registered successfully');
-            }else{
-                header('location: register.php?error=could not create account at the moment, try again later');
+                // If the query is successful
+                if ($stmt->execute()) {
+                    $user_id = $stmt->insert_id; // Get the auto-generated user ID
+                    $_SESSION['user_id'] = $user_id;
+                    $_SESSION['user_email'] = $email;
+                    $_SESSION['user_name'] = $name;
+                    $_SESSION['logged_in'] = true;
+                    header('location: account.php?register=You_registered_successfully');
+                    exit();
+                } else {
+                    header('location: register.php?error=could_not_create_account_at_the_moment_try_again_later');
+                    exit();
+                }
             }
         }
     }
+}
 
+// Check if user is already logged in
+if (isset($_SESSION['logged_in'])) {
+    header('location: account.php');
+    exit();
+}
 
+// Check if user is not logged in and registration form is submitted
+if (isset($_POST['register'])) {
+    $registrationHandler = new RegistrationHandler($conn);
+    $registrationHandler->registerUser($_POST['name'], $_POST['email'], $_POST['password'], $_POST['confirmPassword']);
 }
 
 ?>
-
 
 
 
