@@ -67,8 +67,8 @@ function calculateTotalOrderPrice($order_details){
 
 
     <!--Orders Details-->
-    <section id="orders" class="orders container my-5 py-5" class="">
-        <div class="container text-center mt-5">
+    <section id="orders" class="orders order-detail container my-5 py-5" class="">
+        <div class="container text-center mt-5 order-detail">
             <h2 class="font-weight-bold">Order Details</h2>
             <hr class="mx-auto">
         </div>
@@ -88,7 +88,7 @@ function calculateTotalOrderPrice($order_details){
                     <div class="product-info">
                         <img src="/assets/imgs/<?php echo $row['product_image'];?>" alt="">
                         <div>
-                            <p class="mt-3"><?php echo $row['product_name'];?></p>
+                            <p class="mt-4"><?php echo $row['product_name'];?></p>
                         </div>
                     </div>
                 </td>

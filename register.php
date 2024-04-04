@@ -62,13 +62,16 @@ if(isset($_POST['register'])){
 
         // Insert user info into the users table
         else{
+
+            $hashed_password = md5($password);
+
             $stmt = $conn->prepare("INSERT INTO users (user_name, user_email, user_password) VALUES (?,?,?)");
-            $stmt->bind_param('sss', $name, $email, md5($password)); 
+            $stmt->bind_param('sss', $name, $email, $hashed_password); 
 
 
             // If the query is successful
             if($stmt->execute()){ 
-                $user_id = $stmt->user_id; // Get the auto-generated order ID
+                $user_id = $stmt->insert_id; // Get the auto-generated order ID
                 $_SESSION['user_id'] = $user_id;
                 $_SESSION['user_email'] = $email;
                 $_SESSION['user_name'] = $name;
