@@ -65,7 +65,7 @@ include('layouts/header.php');
         <section id="popular">
             <div class="cards mb-5  pb-5">
                 <div class="container text-center mt-5"  data-aos="fade-up" data-aos-duration="1000">
-                    <h3>Popular</h3>
+                    <h3>Our Sandwiches</h3>
                     <hr class="mx-auto">
                     <p>Here you can check out our featured products</p>
                 </div>
@@ -109,7 +109,7 @@ include('layouts/header.php');
         <section id="burgers" class="home-products">
             <div class="cards">
                 <div class="container text-center mt-5"  data-aos="fade-up" data-aos-duration="1000">
-                    <h3>Burger</h3>
+                    <h3>Our Burgers</h3>
                     <hr class="mx-auto">
                     <p>Here you can check out our featured products</p>
                 </div>
@@ -147,7 +147,7 @@ include('layouts/header.php');
         <section id="fries" class="home-products">
             <div class="cards">
                 <div class="container text-center mt-5"  data-aos="fade-up" data-aos-duration="1000">
-                    <h3>Fries</h3>
+                    <h3>Our Fries</h3>
                     <hr class="mx-auto">
                     <p>Here you can check out our featured products</p>
                 </div>
