@@ -23,6 +23,8 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 
   <img alt="JavaScript" src="https://img.shields.io/badge/logo-javascript-blue?logo=javascript" />
   <img alt="TypeScript" src="https://img.shields.io/npm/v/npm.svg?logo=bootstrap" />
+    <img alt="TypeScript" src="https://img.shields.io/npm/v/npm.svg?logo=php" />
+
   <img alt="HTML" src="https://img.shields.io/badge/HTML-FC613B?style=flat-square&logo=html5&logoColor=FFF" />
   <img alt="CSS" src="https://img.shields.io/badge/CSS-007ACC?style=flat-square&logo=css3&logoColor=FFF" />
   <img alt="Sass" src="https://img.shields.io/badge/SASS-CC6699?style=flat-square&logo=sass&logoColor=FFF" />
