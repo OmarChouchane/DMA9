@@ -60,7 +60,7 @@ if (!isset($_SESSION['logged_in'])) {
         // Empty the cart --> delay until payment is done
 
         // Inform the user that the order is placed successfully 
-        header('location: ../payment.php?order_status=order_placed');
+        header('location: ../payement.php?order_status=order_placed');
     }
 }
 
