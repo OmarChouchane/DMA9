@@ -51,7 +51,9 @@
                             echo "<span class='cart-quantity'>".$_SESSION['quantity']."</span>";
                         } ?>
                        
-                    </i></a>            
+                    </i></a> 
+                    </li> 
+                    <li class="nav-item icons">     
                     <a href="account.php"><i class="fa fa-user"></i></a>
                 </li>
                 

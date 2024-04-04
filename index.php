@@ -44,7 +44,7 @@ include('layouts/header.php');
                         <div class="custom-box">
                             <img src="assets/imgs/<?php echo $row['product_image']; ?>" alt="Image 1" class="img-fluid">
                             <h5 class="mt-3"><?php echo $row['product_name']; ?></h5>
-                            <p class="mt-3">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
+                            <p class="mt-3"><?php echo $row['product_description']; ?></p>
                             <h4 class ="p-price">$<?php echo $row['product_price']; ?></h4>
                             <a href="<?php echo "single_product.php?product_id=".$row['product_id']; ?>"><button class="btn btn-primary mt-3 mb-4">BUY NOW</button></a>
                         </div>
@@ -65,7 +65,7 @@ include('layouts/header.php');
         <section id="popular">
             <div class="cards mb-5  pb-5">
                 <div class="container text-center mt-5"  data-aos="fade-up" data-aos-duration="1000">
-                    <h3>Popular</h3>
+                    <h3>Our Sandwiches</h3>
                     <hr class="mx-auto">
                     <p>Here you can check out our featured products</p>
                 </div>
@@ -84,7 +84,7 @@ include('layouts/header.php');
                                     <img class="img" src="assets/imgs/<?php echo $row['product_image']; ?>">
                                     <div class="card-caption text-center"><h4><?php echo $row['product_name']; ?></h4> </div>
                                     <h4 class ="p-price">$<?php echo $row['product_price']; ?></h4>
-                                    <p class="mt-4">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
+                                    <p class="mt-4"><?php echo $row['product_description']; ?></p>
                                     <button class="btn btn-primary mt-3 mb-4">Order Now</button>
                                     
                                 </div>
@@ -109,7 +109,7 @@ include('layouts/header.php');
         <section id="burgers" class="home-products">
             <div class="cards">
                 <div class="container text-center mt-5"  data-aos="fade-up" data-aos-duration="1000">
-                    <h3>Burger</h3>
+                    <h3>Our Burgers</h3>
                     <hr class="mx-auto">
                     <p>Here you can check out our featured products</p>
                 </div>
@@ -126,7 +126,7 @@ include('layouts/header.php');
                                     <img class="img" src="assets/imgs/<?php echo $row['product_image']; ?>">
                                     <div class="card-caption text-center"><h4><?php echo $row['product_name']; ?></h4> </div>
                                     <h4 class ="p-price">$<?php echo $row['product_price']; ?></h4>
-                                    <p class="mt-4">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
+                                    <p class="mt-4"><?php echo $row['product_description']; ?></p>
 
                                     <a href="<?php echo "single_product.php?product_id=".$row['product_id']; ?>"><button class="btn btn-primary mt-3 mb-4">BUY NOW</button></a>
                                 </div>
@@ -147,7 +147,7 @@ include('layouts/header.php');
         <section id="fries" class="home-products">
             <div class="cards">
                 <div class="container text-center mt-5"  data-aos="fade-up" data-aos-duration="1000">
-                    <h3>Fries</h3>
+                    <h3>Our Fries</h3>
                     <hr class="mx-auto">
                     <p>Here you can check out our featured products</p>
                 </div>
@@ -164,7 +164,7 @@ include('layouts/header.php');
                                     <img class="img" src="assets/imgs/<?php echo $row['product_image']; ?>">
                                     <div class="card-caption text-center"><h4><?php echo $row['product_name']; ?></h4> </div>
                                     <h4 class ="p-price">$<?php echo $row['product_price']; ?></h4>
-                                    <p class="mt-4">Short Description Lorem ipsum<br> Quo earum repudiandae <br>end of desc</p>
+                                    <p class="mt-4"><?php echo $row['product_description']; ?></p>
 
                                     <a href="<?php echo "single_product.php?product_id=".$row['product_id']; ?>"><button class="btn btn-primary mt-3 mb-4">BUY NOW</button></a>
                                 </div>
@@ -195,7 +195,7 @@ include('layouts/header.php');
                                         <i class="bi bi-stopwatch icon-feature text-gradient d-block mb-3"></i>
 
                                         <h3 class="font-alt">Sor3a</h3>
-                                        <p class="text-muted mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                        <p class="text-muted mb-0">****</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-5" data-aos="fade-left" data-aos-duration="1000">
