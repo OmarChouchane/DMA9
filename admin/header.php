@@ -28,7 +28,8 @@ include '../server/connection.php';
 
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="dashboard.css">
-    <title>DMA9</title>
+
+    <title>DMA9 admin</title>
     <link rel="icon" href="/assets/imgs/dma9.-logo-square.png" type="image/x-icon">
 </head>
 <body id="body-pd" class="body-pd">
