@@ -49,8 +49,20 @@ if(isset($_GET['search'])){
 
         $products = $stmt->get_result();
 
-        $total_no_of_pages = 1;
+        $total_records = $products->num_rows;
 
+        $total_records_per_page = 8;
+    
+        $offset = ($page_no - 1) * $total_records_per_page;
+
+        $previous_page = $page_no - 1;
+        $next_page = $page_no + 1;
+
+        $adjacent = "2";
+
+        $total_no_of_pages = ceil($total_records/$total_records_per_page);
+
+        
     }else{
         
         $price = $_GET['price'];
