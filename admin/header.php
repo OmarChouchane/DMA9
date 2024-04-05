@@ -28,8 +28,8 @@ include '../server/connection.php';
 
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="dashboard.css">
-    <title>The North Face</title>
-    <link rel="icon" href="../assets/imgs/logo22.png" type="image/x-icon">
+    <title>DMA9</title>
+    <link rel="icon" href="/assets/imgs/dma9.-logo-square.png" type="image/x-icon">
 </head>
 <body id="body-pd" class="body-pd">
 
