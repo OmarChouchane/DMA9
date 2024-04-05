@@ -94,8 +94,8 @@ if(isset($_POST['login_btn'])){
 
 
     <link rel="stylesheet" href="dashboard.css">
-    <title>The North Face</title>
-    <link rel="icon" href="/assets/imgs/logo22.png" type="image/x-icon">
+    <title>DMA9 admin</title>
+    <link rel="icon" href="/assets/imgs/dma9.-logo-square.png" type="../image/x-icon">
 </head>
 <body>
 
