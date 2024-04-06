@@ -1291,6 +1291,25 @@ footer p{
     background-color: black;
 }
 
+#heart-button {
+    background: transparent;
+    border-color: red;
+    color: black; /* Set the initial color as transparent */
+    font-size: 24px;
+    cursor: pointer;
+    outline: none;
+    transition: transform 0.3s, color 0.3s;
+    margin-left: 120px;
+    margin-top: -40px;
+}
+
+#heart-button:hover {
+    transform: translateX(0px); /* Move button  on hover */
+}
+
+#heart-button.clicked {
+    border-color: red; /* Set color to red when clicked */
+}
 
 
     

@@ -318,9 +318,21 @@ if(isset($_GET['search'])){
                 <h3>No products found</h3>
             </div>
         <?php }?>
-
+        
         <?php while($row = $products->fetch_assoc()) {?>
+            
+
             <div class="product text-center col-lg-3 col-md-4 col-sm-12">
+                <form id="wishlist-form" action="shop.php" method="post">
+                <input type="hidden" name="pid" value="<?php echo $row['product_id']; ?>">
+                <input type="hidden" name="name" value="<?php echo $row['product_name']; ?>">
+                <input type="hidden" name="price" value="<?php echo $row['product_price']; ?>">
+                <input type="hidden" name="image" value="<?php echo $row['product_image']; ?>">
+                <button id="heart-button" type="submit" name="add_to_wishlist">
+                    <i class="far fa-heart"></i>
+                </button>
+
+                </form>
                 <img onclick="window.location.href='<?php echo "single_product.php?product_id=".$row['product_id'];?>'" src="assets/imgs/<?php echo $row['product_image'];?>" class="img-fluid mb-3">
                 <div class="star">
                     <i class="fa fa-star"></i>
@@ -333,8 +345,10 @@ if(isset($_GET['search'])){
                 <h4 class ="p-price">$<?php echo $row['product_price'];?></h4>
                 <button class="buy-btn" onclick="window.location.href='<?php echo "single_product.php?product_id=".$row['product_id'];?>'" >BUY NOW</button>
             </div>
+            
 
         <?php } ?>
+        
         
             <nav aria-label="page navigation">
                 <ul class="pagination justify-content-center mt-5">
@@ -400,6 +414,8 @@ if(isset($_GET['search'])){
         rangeInput.addEventListener('input', function() {
             rangeValue.textContent = rangeInput.value;
         });
+
+        
 
 
     </script>
