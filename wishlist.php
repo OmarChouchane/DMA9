@@ -39,6 +39,7 @@ if(isset($_POST['add_to_wishlist'])){
         header('location:login.php');
         exit(); // Exit to prevent further execution
     }
+    header('location:shop.php' );
 
     // Sanitize input data
     $pid = filter_var($_POST['pid'], FILTER_SANITIZE_STRING);
@@ -61,6 +62,7 @@ if(isset($_POST['add_to_wishlist'])){
         $insert_wishlist->execute();
         $message = 'Product added to your wishlist!';
     }
+
 }
 
 ?>
