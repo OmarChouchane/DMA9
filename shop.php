@@ -329,7 +329,7 @@ if(isset($_GET['search'])){
                 <input type="hidden" name="price" value="<?php echo $row['product_price']; ?>">
                 <input type="hidden" name="image" value="<?php echo $row['product_image']; ?>">
                 <button id="heart-button" type="submit" name="add_to_wishlist">
-                    <i class="far fa-heart"></i>
+                    <i id="heart-icon" class="fa fa-heart"></i>
                 </button>
 
                 </form>
@@ -419,6 +419,32 @@ if(isset($_GET['search'])){
 
 
     </script>
+   
+    <style>
+        #heart-button 
+        i{
+            color:grey;
+        }
+        .heart-red {
+        background-color: red;
+        }
+        #heart-button 
+        i:hover{
+            color:red;
+        }
+        .red-heart {
+        color: red; /* Set the color to red */
+        }
+    </style>
+     <script>
+        document.getElementById('heart-button').addEventListener('click',function(){
+            document.getElementById("heart-icon").classList.toggle("heart-red ");
+            
+        });
+    </script>
+    
+    
+
 
 
 <?php include('layouts/footer.php'); ?>

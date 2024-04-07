@@ -67,6 +67,8 @@ if(isset($_POST['add_to_wishlist'])){
     $result = $check_wishlist->get_result();
     if($result->num_rows > 0){
         $message = 'This product is already in your wishlist!';
+        header('location:shop.php?This product is already in your wishlist!');
+        
        
     }else{
         // Insert the product into the wishlist
@@ -74,6 +76,9 @@ if(isset($_POST['add_to_wishlist'])){
         $insert_wishlist->bind_param("issss", $user_id, $pid, $name, $price, $image); // Bind parameters
         $insert_wishlist->execute();
         $message = 'Product added to your wishlist!';
+        header('location:shop.php?Product added to your wishlist!!');
+
+        
     }
 
 }
