@@ -1089,6 +1089,53 @@ footer p{
     color: #fb774b;
 }
 
+/* Contact Us*/
+#contact-form{
+    width: 50%;
+    margin: 5px auto;
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #fb774b;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    #contact-form {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    #contact-form {
+        width: 100%;
+    }
+}
+
+
+#contact-form input{
+    width: 50%;
+    margin: 5px auto;
+}
+#contact-form textarea{
+    width: 50%;
+    margin: 5px auto;
+}
+#contact-form #send-btn{
+    background-color: #fb774b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+#contact-form #contact-btn:hover{
+    background-color: black;
+}
+
+
+
 
 
 
@@ -1262,7 +1309,7 @@ footer p{
 
 
 
-/* Contact */
+/* Contact 
 
 #contact span{
     color: #fb774b;
@@ -1285,7 +1332,7 @@ footer p{
     transition: 0.4s ease;
     
 }
-
+*/
 
 .nav-item i:hover .cart-quantity {
     background-color: black;
