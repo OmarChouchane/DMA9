@@ -39,9 +39,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="shop.php">Shop</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Blog</a>
-                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="contact.php">Contact Us</a>
                 </li>
@@ -55,6 +53,9 @@
                     </li> 
                     <li class="nav-item icons">     
                     <a href="account.php"><i class="fa fa-user"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="wishlist.php">9ALB-ICI</a>
                 </li>
                 
                 </ul>

@@ -323,7 +323,7 @@ if(isset($_GET['search'])){
             
 
             <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-                <form id="wishlist-form" action="shop.php" method="post">
+                <form id="wishlist-form" action="wishlist.php" method="post">
                 <input type="hidden" name="pid" value="<?php echo $row['product_id']; ?>">
                 <input type="hidden" name="name" value="<?php echo $row['product_name']; ?>">
                 <input type="hidden" name="price" value="<?php echo $row['product_price']; ?>">
