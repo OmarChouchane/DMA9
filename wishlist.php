@@ -84,7 +84,6 @@ if(isset($_POST['add_to_wishlist'])){
 }
 
 ?>
-
 <section class="container text-center my-3 py-3">
     <div class="container mt-5">
     <h2 class="font-weight-bold" >Your Wishlist</h2>
@@ -141,5 +140,7 @@ if(isset($_POST['add_to_wishlist'])){
     </div>
 </section>
 
+
 <script src="js/script.js"></script>
+
 <?php include 'layouts/footer.php'; ?>
