@@ -55,8 +55,15 @@
                     <a href="account.php"><i class="fa fa-user"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="wishlist.php"><i class="fa fa-heart mx-1" style="font-size: 18px;"></i></a>
+                <a href="wishlist.php">
+                    <i class="fa fa-heart mx-1" style="font-size: 18px;">
+                    <?php if(isset($_SESSION['wishlist_item_count']) && $_SESSION['wishlist_item_count'] != 0){
+                            echo "<span class='cart-quantity'>".$_SESSION['wishlist_item_count']."</span>";
+                        } ?>
+                    </i>
+                </a>
                 </li>
+
                 
                 </ul>
             </div>

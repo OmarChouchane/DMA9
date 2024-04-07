@@ -25,6 +25,19 @@ if(isset($_GET['delete_all'])){
     header('location:wishlist.php');
     exit(); // Exit to prevent further execution
 }
+// Retrieve the count of wishlist items for the current user
+    $count_wishlist_items = 0;
+    if (!empty($user_id)) {
+    $count_wishlist_query = $conn->prepare("SELECT COUNT(*) AS count FROM `wishlist` WHERE user_id = ?");
+    $count_wishlist_query->bind_param("i", $user_id);
+    $count_wishlist_query->execute();
+    $count_result = $count_wishlist_query->get_result();
+    $count_row = $count_result->fetch_assoc();
+    $count_wishlist_items = $count_row['count'];
+    //echo ''. $count_wishlist_items .'';
+    $_SESSION['wishlist_item_count'] = $count_wishlist_items;
+}
+
 
 ?>
 
