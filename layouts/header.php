@@ -55,7 +55,7 @@
                     <a href="account.php"><i class="fa fa-user"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="wishlist.php">9ALB-ICI</a>
+                    <a href="wishlist.php"><i class="fa fa-heart mx-1" style="font-size: 18px;"></i></a>
                 </li>
                 
                 </ul>
