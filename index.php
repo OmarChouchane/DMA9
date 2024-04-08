@@ -14,10 +14,10 @@ include('layouts/header.php');
         <!--Home--> 
         <section id="home" data-aos="fade-up"  data-aos-duration="2000">
                 <div class="container">
-                    <h5>NEW ARRIVALS</h5>
-                    <h1><span>Best Prices</span>This Season</h1>
-                    <p>Eshop offers the best products for the most affordable prices</p>
-                    <button>SHOP NOW</button>
+                    <h5>Taste</h5>
+                    <h1><span>The Best Food</span><br/> in Town</h1>
+                    <p>Order, Eat, Repeat ! Your delicious journey starts here.</p>
+                    <button onclick="goTo()">ORDER NOW</button>
                 </div>
         </section>
     
@@ -195,7 +195,7 @@ include('layouts/header.php');
                                         <i class="bi bi-stopwatch icon-feature text-gradient d-block mb-3"></i>
 
                                         <h3 class="font-alt">Sor3a</h3>
-                                        <p class="text-muted mb-0">****</p>
+                                        <p class="text-muted mb-0">prioritizing speed without compromising quality.</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-5" data-aos="fade-left" data-aos-duration="1000">
@@ -203,7 +203,7 @@ include('layouts/header.php');
                                     <div class="text-center">
                                         <i class="bi bi-emoji-laughing icon-feature text-gradient d-block mb-3"></i>
                                         <h3 class="font-alt">Bachecha</h3>
-                                        <p class="text-muted mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                        <p class="text-muted mb-0"> Serving smiles with every dish.</p>
                                     </div>
                                 </div>
                             </div>
@@ -213,7 +213,7 @@ include('layouts/header.php');
                                     <div class="text-center">
                                         <i class="bi bi-check-lg icon-feature text-gradient d-block mb-3"></i>
                                         <h3 class="font-alt">Mawthou9</h3>
-                                        <p class="text-muted mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                        <p class="text-muted mb-0">Selecting each ingredient, aiming confidence in our dishes.</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6" data-aos="fade-left" data-aos-duration="1000">
@@ -221,7 +221,7 @@ include('layouts/header.php');
                                     <div class="text-center">
                                         <i class="bi bi-cash icon-feature text-gradient d-block mb-3"></i>
                                         <h3 class="font-alt">R5is</h3>
-                                        <p class="text-muted mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                        <p class="text-muted mb-0">Affordable for all.</p>
                                     </div>
                                 </div>
                             </div>
@@ -246,65 +246,7 @@ include('layouts/header.php');
 
 
 
-        <!--Footer-->
-        <footer class=" pt-5">
-            <div class="row container mx-auto pt-5">
-                <div class="footer-one col-lg-3 col-md-6 col-sm-12">
-                    <img src="assets/imgs/dma9-logo-2.png" class="logo2" alt="">
-                    <p class="pt-3">We provide the best products the  most affordable prices</p>
-                    <img class="logo3" src="/assets/imgs/back2.png">
-                <img class="logo3" src="/assets/imgs/back2.png">
-                </div>
-                <div class="footer-one col-lg-3 col-md-6 col-sm-12">
-                    <h5 class="pb-2">Featured</h5>
-                    <ul>
-                        <li><a href="#">men</a></li>
-                        <li><a href="#">women</a></li>
-                        <li><a href="#">boys</a></li>
-                        <li><a href="#">girls</a></li>
-                        <li><a href="#">new arrivals</a></li>
-                        <li><a href="#">clothes</a></li>
-                    </ul>
-                </div>
-                <div class="footer-one col-lg-3 col-md-6 col-sm-12">
-                    <h5 class="pb-2">Contact Us</h5>
-                    <div>
-                        <h6>Address</h6>
-                        <p>1234 Street Name, City</p>
-                    </div>
-                    <div>
-                        <h6>Phone</h6>
-                        <p>12 345 678</p>
-                    </div>
-                    <div>
-                        <h6>Email</h6>
-                        <p>contact@gmail.com</p>
-                    </div>
-                </div>
-                <div class="footer-one col-lg-3 col-md-6 col-sm-12">
-                    <h5 class="pb-2">Products</h5>
-                    <div class="row">
-                        <ul>
-                            <li><a href="#">shoes</a></li>
-                            <li><a href="#">watches</a></li>
-                            <li><a href="#">coats</a></li>
-                            <li><a href="#">dresses</a></li>
-                            <li><a href="#">bags</a></li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-    
-    
-            <div class="copyright mt-5">
-                <div class="row container mx-auto text-center">
-                        <p>eCommerce @ 2025 All Rights Reserved to DMA9. Team</p>
-                </div>
-            </div>
-        </footer>
+        <?php include('layouts/footer.php'); ?>
     
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         
@@ -313,6 +255,7 @@ include('layouts/header.php');
 
         <script>
           AOS.init();
+}
         </script>
 
 
