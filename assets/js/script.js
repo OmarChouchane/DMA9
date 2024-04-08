@@ -6,3 +6,14 @@ window.addEventListener('scroll', function() {
         navbar.classList.remove('scrolled');
     }
 });
+
+
+
+window.addEventListener('DOMContentLoaded', function() {
+    var heartIcon = document.getElementByClassName('fa-heart');
+    heartIcon.addEventListener('click', function(event) {
+        event.preventDefault(); 
+        this.classList.toggle('favorite'); 
+    });
+});
+

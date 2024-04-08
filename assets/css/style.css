@@ -1291,11 +1291,14 @@ footer p{
     background-color: black;
 }
 
+.favorite {
+    color: red; 
+}
+
 #heart-button {
     background: transparent;
-    border-color: red;
-    color: black; /* Set the initial color as transparent */
-    font-size: 24px;
+    color: black;
+    font-size : 24px;
     cursor: pointer;
     outline: none;
     transition: transform 0.3s, color 0.3s;
@@ -1303,13 +1306,23 @@ footer p{
     margin-top: -40px;
 }
 
+
 #heart-button:hover {
-    transform: translateX(0px); /* Move button  on hover */
+    transform: translateX(0px); 
 }
 
-#heart-button.clicked {
-    border-color: red; /* Set color to red when clicked */
+.fa-heart {
+    cursor: pointer;
 }
+
+.fa-heart.favorite{
+    color: red;
+}
+  
+
+
+
+
 
 
     
