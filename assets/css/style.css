@@ -971,12 +971,19 @@ footer p{
     text-align: right;
 }
 
-.checkout-container{
+.buttons{
     display: flex;
-    justify-content: flex-end;
+    flex-direction: row-reverse;
 }
 
-.checkout-btn{
+.checkout-container,
+.pdf-invoice-container
+{
+    padding-right: 10px;
+}
+
+.checkout-btn, .pdf-invoice-btn
+{
     background-color: #fb774b;
     color: white;
 }

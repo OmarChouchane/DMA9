@@ -1,10 +1,5 @@
 </div>
 
-   
-
-
-
-
 
         <!--Footer-->
         <footer class=" pt-5">

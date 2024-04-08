@@ -197,11 +197,18 @@ function calculateTotalCart(){
             </table>
         </div>
 
+        <div class="buttons">
+            <div class="checkout-container">
+                <form method="POST" action="checkout.php">
+                <input type="submit" name="checkout" class="btn checkout-btn" value="Check Out">
+                </form>
+            </div>
 
-        <div class="checkout-container">
-            <form method="POST" action="checkout.php">
-            <input type="submit" name="checkout" class="btn checkout-btn" value="Check Out">
-            </form>
+            <div class="pdf-invoice-container">
+                <form method="POST" action="invoice.php">
+                <input type="submit" name="generate invoice" class="btn pdf-invoice-btn" value="Generate Invoice">
+                </form>
+            </div>
         </div>
 
     </section>

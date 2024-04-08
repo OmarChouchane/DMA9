@@ -14,9 +14,13 @@ include('layouts/header.php');
         <!--Home--> 
         <section id="home" data-aos="fade-up"  data-aos-duration="2000">
                 <div class="container">
-                    <h5>Taste</h5>
-                    <h1><span>The Best Food</span><br/> in Town</h1>
-                    <p>Order, Eat, Repeat ! Your delicious journey starts here.</p>
+                    <p style="font-size: 60px;
+                    margin-bottom: -4px;
+                    font-weight: bold;
+                    padding-left: 2px;">
+                    Taste</p>
+                    <h1><span>The Best Food</span><br/></h1><h1 style="padding-left: 11px;">in Town .</h1>
+                    <p style="padding-left: 13px;">Order, Eat, Repeat ! Your delicious journey starts here.</p>
                     <button onclick="goTo()">ORDER NOW</button>
                 </div>
         </section>
