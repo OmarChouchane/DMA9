@@ -1,19 +1,29 @@
-<?php 
-
-
+<?php
 session_start();
 
-
-if(isset($_POST['add_to_cart'])){
-    
-    if(isset($_SESSION['cart'])){ /// if cart is not empty
-
-        $product_array_ids = array_column($_SESSION['cart'], 'product_id');
-        
-        if(!in_array($_POST['product_id'], $product_array_ids)){ // if product is not in cart
-
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST['add_to_cart'])) {
+        if (isset($_SESSION['cart'])) { // If cart is not empty
+            $product_array_ids = array_column($_SESSION['cart'], 'product_id');
+            if (!in_array($_POST['product_id'], $product_array_ids)) { // If product is not in cart
+                $product_id = $_POST['product_id'];
+                $product_array = array(
+                    'product_id' => $_POST['product_id'],
+                    'product_name' => $_POST['product_name'],
+                    'product_price' => $_POST['product_price'],
+                    'product_image' => $_POST['product_image'],
+                    'product_quantity' => $_POST['product_quantity']
+                );
+                $_SESSION['cart'][$product_id] = $product_array;
+            } else { // If product is already in cart
+                foreach ($_SESSION['cart'] as $key => $value) {
+                    if ($value['product_id'] == $_POST['product_id']) {
+                        $_SESSION['cart'][$key]['product_quantity'] += $_POST['product_quantity'];
+                    }
+                }
+            }
+        } else { // If cart is empty
             $product_id = $_POST['product_id'];
-
             $product_array = array(
                 'product_id' => $_POST['product_id'],
                 'product_name' => $_POST['product_name'],
@@ -21,70 +31,29 @@ if(isset($_POST['add_to_cart'])){
                 'product_image' => $_POST['product_image'],
                 'product_quantity' => $_POST['product_quantity']
             );
-
             $_SESSION['cart'][$product_id] = $product_array;
-
-        }else{ // if product is in cart
-
-            foreach($_SESSION['cart'] as $key => $value){
-
-                if($value['product_id'] == $_POST['product_id']){
-
-                    $_SESSION['cart'][$key]['product_quantity'] += $_POST['product_quantity'];
-
-                }
-
-            }
-
         }
-
-    }else{ // if cart is empty
-
+        calculateTotalCart();
+        header("Location: cart.php"); 
+        exit(); 
+    } else if (isset($_POST['remove_product'])) { 
         $product_id = $_POST['product_id'];
-        $product_name = $_POST['product_name'];
-        $product_price = $_POST['product_price'];
-        $product_image = $_POST['product_image'];
+        if (isset($_SESSION['cart'][$product_id])) {
+            unset($_SESSION['cart'][$product_id]);
+            calculateTotalCart();
+        }
+        header("Location: cart.php");
+        exit(); 
+    } else if (isset($_POST['edit_quantity'])) { 
+        $product_id = $_POST['product_id'];
         $product_quantity = $_POST['product_quantity'];
-
-        $product_array = array(
-            'product_id' => $product_id,
-            'product_name' => $product_name,
-            'product_price' => $product_price,
-            'product_image' => $product_image,
-            'product_quantity' => $product_quantity
-        );
-
-        $_SESSION['cart'][$product_id] = $product_array;
-        $_SESSION['cart'][$product_id] = $product_array;
-
+        if (isset($_SESSION['cart'][$product_id])) {
+            $_SESSION['cart'][$product_id]['product_quantity'] = $product_quantity;
+            calculateTotalCart();
+        }
+        header("Location: cart.php"); 
+        exit(); 
     }
-
-    calculateTotalCart();
-
-}else if(isset($_POST['remove_product'])){ // remove product from cart
-
-
-    $product_id = $_POST['product_id'];
-    unset($_SESSION['cart'][$product_id]);
-
-    calculateTotalCart();
-    
-    
-}else if(isset($_POST['edit_quantity'])){ // edit product quantity
-
-    
-    $product_id = $_POST['product_id'];
-    $product_quantity = $_POST['product_quantity'];
-
-    $_SESSION['cart'][$product_id]['product_quantity'] = $product_quantity;
-
-    calculateTotalCart();
-
-
-}else{
-
-    //header('Location: index.php');
-
 }
 
 
