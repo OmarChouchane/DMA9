@@ -328,8 +328,8 @@ if(isset($_GET['search'])){
                 <input type="hidden" name="name" value="<?php echo $row['product_name']; ?>">
                 <input type="hidden" name="price" value="<?php echo $row['product_price']; ?>">
                 <input type="hidden" name="image" value="<?php echo $row['product_image']; ?>">
-                <button id="heart-button" type="submit" name="add_to_wishlist">
-                    <i id="heart-icon" class="fa fa-heart"></i>
+                <button id="heart-button" type="submit" name="add_to_wishlist" class="active">
+                    <i class="fa fa-heart"></i>
                 </button>
 
                 </form>
