@@ -32,7 +32,7 @@ include('layouts/header.php');
             <div class="container text-center mt-5" data-aos="fade-up" data-aos-duration="1000">
                 <h3>The Most Popular</h3>
                 <hr class="mx-auto">
-                <p>Here you can check out our featured products</p>
+                 <!--<p>Here you can check out our featured products</p>-->
             </div>
     
             <div class="container my-5 pb-3 custom-container" data-aos="fade-up" data-aos-duration="1000">
@@ -71,7 +71,7 @@ include('layouts/header.php');
                 <div class="container text-center mt-5"  data-aos="fade-up" data-aos-duration="1000">
                     <h3>Our Sandwiches</h3>
                     <hr class="mx-auto">
-                    <p>Here you can check out our featured products</p>
+                      <!--<p>Here you can check out our featured products</p>-->
                 </div>
                 <div class="container">
                     <div class="row m-5 pt-5">
@@ -115,7 +115,7 @@ include('layouts/header.php');
                 <div class="container text-center mt-5"  data-aos="fade-up" data-aos-duration="1000">
                     <h3>Our Burgers</h3>
                     <hr class="mx-auto">
-                    <p>Here you can check out our featured products</p>
+                      <!--<p>Here you can check out our featured products</p>-->
                 </div>
                 <div class="container">
                     <div class="row m-5 pt-5">
@@ -153,7 +153,7 @@ include('layouts/header.php');
                 <div class="container text-center mt-5"  data-aos="fade-up" data-aos-duration="1000">
                     <h3>Our Fries</h3>
                     <hr class="mx-auto">
-                    <p>Here you can check out our featured products</p>
+                    <!--<p>Here you can check out our featured products</p>-->
                 </div>
                 <div class="container">
                     <div class="row m-5 pt-5">
