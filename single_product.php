@@ -1,22 +1,45 @@
-<?php 
-session_start(); 
+<?php
+session_start();
 include('server/connection.php');
 
-if(isset($_GET['product_id'])){
+class Product
+{
+    private $conn;
+
+    public function __construct($conn)
+    {
+        $this->conn = $conn;
+    }
+
+    public function getProductById($product_id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM products WHERE product_id = ?");
+        $stmt->bind_param("i", $product_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+    public function getRelatedProducts($product_id, $product_category)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM products WHERE product_category = ? AND product_id != ? LIMIT 4");
+        $stmt->bind_param("si", $product_category, $product_id);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+}
+
+// Create an instance of the Product class
+$productManager = new Product($conn);
+
+if (isset($_GET['product_id'])) {
     $product_id = $_GET['product_id'];
 
-    $stmt = $conn->prepare("SELECT * FROM products WHERE product_id = ?");
-    $stmt->bind_param("i", $product_id);
-    
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-
-    // Fetch the product details as an associative array
-    $product = $result->fetch_assoc();
+    // Get product details
+    $product = $productManager->getProductById($product_id);
 
     // Check if product exists
-    if(!$product) {
+    if (!$product) {
         // Redirect if product not found
         header('location: index.php');
         exit(); // Terminate script execution
@@ -39,22 +62,18 @@ if(isset($_GET['product_id'])){
             <img class="img-fluid w-100 pb-1" src="/assets/imgs/<?php echo $product['product_image']; ?>" alt="" id="mainImg">
             <!-- Small Images Section -->
             <div class="small-img-group">
-                
-                
-                    <div class="small-img-col">
-                        <img src="/assets/imgs/<?php echo $product['product_image' ]; ?>" width="100%" class="small-img">
-                    </div>
-                    <div class="small-img-col">
-                        <img src="/assets/imgs/<?php echo $product['product_image2']; ?>" width="100%" class="small-img">
-                    </div>
-                    <div class="small-img-col">
-                        <img src="/assets/imgs/<?php echo $product['product_image3']; ?>" width="100%" class="small-img">
-                    </div>
-                    <div class="small-img-col">
-                        <img src="/assets/imgs/<?php echo $product['product_image4']; ?>" width="100%" class="small-img">
-                    </div>
-
-                
+                <div class="small-img-col">
+                    <img src="/assets/imgs/<?php echo $product['product_image']; ?>" width="100%" class="small-img">
+                </div>
+                <div class="small-img-col">
+                    <img src="/assets/imgs/<?php echo $product['product_image2']; ?>" width="100%" class="small-img">
+                </div>
+                <div class="small-img-col">
+                    <img src="/assets/imgs/<?php echo $product['product_image3']; ?>" width="100%" class="small-img">
+                </div>
+                <div class="small-img-col">
+                    <img src="/assets/imgs/<?php echo $product['product_image4']; ?>" width="100%" class="small-img">
+                </div>
             </div>
         </div>
 
@@ -64,13 +83,13 @@ if(isset($_GET['product_id'])){
             <h3 class="py-4"><?php echo $product['product_name']; ?></h3>
             <h2>$<?php echo $product['product_price']; ?></h2>
             <form method="POST" action="cart.php">
-                <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>"/>
-                <input type="hidden" name="product_image" value="<?php echo $product['product_image']; ?>"/>
-                <input type="hidden" name="product_name" value="<?php echo $product['product_name']; ?>"/>
-                <input type="hidden" name="product_price" value="<?php echo $product['product_price']; ?>"/>
+                <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>" />
+                <input type="hidden" name="product_image" value="<?php echo $product['product_image']; ?>" />
+                <input type="hidden" name="product_name" value="<?php echo $product['product_name']; ?>" />
+                <input type="hidden" name="product_price" value="<?php echo $product['product_price']; ?>" />
                 <input type="number" name="product_quantity" value="1">
                 <button class="buy-btn" name="add_to_cart" type="submit">ADD TO CART</button>
-            </form> 
+            </form>
             <h4 class="my-5">Product details</h4>
             <span><?php echo $product['product_description']; ?></span>
         </div>
@@ -85,13 +104,9 @@ if(isset($_GET['product_id'])){
     </div>
     <div class="row mx-auto container-fluid">
         <?php
-        // Retrieve related products from the same category
-        $stmt_related = $conn->prepare("SELECT * FROM products WHERE product_category = ? AND product_id != ? LIMIT 4");
-        $stmt_related->bind_param("si", $product['product_category'], $product_id);
-        $stmt_related->execute();
-        $result_related = $stmt_related->get_result();
-
-        while ($row_related = $result_related->fetch_assoc()) {
+        // Retrieve related products
+        $relatedProducts = $productManager->getRelatedProducts($product_id, $product['product_category']);
+        while ($row_related = $relatedProducts->fetch_assoc()) {
         ?>
             <!-- Product Card -->
             <div class="product text-center col-lg-3 col-md-4 col-sm-12">
@@ -112,8 +127,8 @@ if(isset($_GET['product_id'])){
     var mainImg = document.getElementById('mainImg');
     var smallImg = document.getElementsByClassName('small-img');
 
-    for(let i=0; i<smallImg.length; i++){
-        smallImg[i].onclick = function(){
+    for (let i = 0; i < smallImg.length; i++) {
+        smallImg[i].onclick = function() {
             mainImg.src = smallImg[i].src;
         }
     }
