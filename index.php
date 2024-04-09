@@ -4,6 +4,7 @@ session_start();
 
 
 include('layouts/header.php'); 
+require ('vendor/autoload.php');
 
 ?>
 

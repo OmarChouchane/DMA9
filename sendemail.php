@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 include('contact.php');
 //Load Composer's autoloader
-require 'vendor/autoload.php';
+require ('vendor/autoload.php');
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
