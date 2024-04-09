@@ -22,7 +22,7 @@ include('layouts/header.php');
                 Phone number : <span>123 456 789</span>
             </p>
             <p class="w-50 mx-auto">
-                Email address : <span>info@email.com</span>
+                Email address : <span>contactdma9@email.com</span>
             </p>
             <p class="w-50 mx-auto">
                 We work 24/7 to answer your questions
