@@ -11,14 +11,16 @@ if(isset($_SESSION['user_id'])){
 }
 
 // Check if the user is logged in
-if(isset($_POST['delete'])){
+if(isset($_POST['delete']))
+{
     $wishlist_id = $_POST['wishlist_id'];
     $delete_wishlist_item = $conn->prepare("DELETE FROM `wishlist` WHERE wishlist_id = ?");
     $delete_wishlist_item->bind_param("i", $wishlist_id); // Bind parameter
     $delete_wishlist_item->execute();
 }
 
-if(isset($_GET['delete_all'])){
+if(isset($_GET['delete_all']))
+{
     $delete_wishlist_item = $conn->prepare("DELETE FROM `wishlist` WHERE user_id = ?");
     $delete_wishlist_item->bind_param("i", $user_id); // Bind parameter
     $delete_wishlist_item->execute();
@@ -59,7 +61,6 @@ if(isset($_POST['add_to_wishlist'])){
     $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
     $price = filter_var($_POST['price'], FILTER_SANITIZE_STRING);
     $image = filter_var($_POST['image'], FILTER_SANITIZE_STRING);
-
     // Check if the product is already in the wishlist
     $check_wishlist = $conn->prepare("SELECT * FROM `wishlist` WHERE product_name = ? AND user_id = ?");
     $check_wishlist->bind_param("si", $name, $user_id); // Bind parameters
@@ -137,6 +138,7 @@ if(isset($_POST['add_to_wishlist'])){
         <a style="color:orange;" href="wishlist.php?delete_all"
            class="delete-btn <?= ($grand_total > 0) ? '' : 'disabled'; ?>"
            onclick="return confirm('Delete all items from wishlist?');">Delete All Items</a>
+
     </div>
 </section>
 
