@@ -78,8 +78,7 @@ if(isset($_POST['add_to_wishlist'])){
         $insert_wishlist->execute();
         $message = 'Product added to your wishlist!';
         header('location:shop.php?Product added to your wishlist!!');
-
-        
+           
     }
 
 }

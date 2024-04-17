@@ -9,6 +9,7 @@ class Product
     public function __construct($conn)
     {
         $this->conn = $conn;
+
     }
 
     public function getProductById($product_id)
@@ -79,7 +80,7 @@ if (isset($_GET['product_id'])) {
 
         <!-- Product Details Section -->
         <div class="col-lg-6 col-12">
-            <h6>Men/Shoes</h6>
+            
             <h3 class="py-4"><?php echo $product['product_name']; ?></h3>
             <h2>$<?php echo $product['product_price']; ?></h2>
             <form method="POST" action="cart.php">
