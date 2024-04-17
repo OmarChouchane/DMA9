@@ -55,7 +55,7 @@ if(isset($_POST['add_to_cart'])){
         );
 
         $_SESSION['cart'][$product_id] = $product_array;
-        $_SESSION['cart'][$product_id] = $product_array;
+        //$_SESSION['cart'][$product_id] = $product_array;
 
     }
 
@@ -79,6 +79,7 @@ if(isset($_POST['add_to_cart'])){
     $_SESSION['cart'][$product_id]['product_quantity'] = $product_quantity;
 
     calculateTotalCart();
+
 
 
 }else{
