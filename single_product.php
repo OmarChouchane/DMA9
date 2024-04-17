@@ -119,6 +119,7 @@ if (isset($_GET['product_id'])) {
                 <!-- Buy Now Button with Link to Single Product Page -->
                 <a href="single_product.php?product_id=<?php echo $row_related['product_id']; ?>"><button class="buy-btn">BUY NOW</button></a>
             </div>
+            
         <?php } ?>
     </div>
 </section>
