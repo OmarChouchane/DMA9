@@ -41,7 +41,7 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.php">Contact Us</a>
+                    <a class="nav-link" href="#contact-us-0">Contact Us</a>
                 </li>
                 <li class="nav-item icons"> 
                     <a href="cart.php"><i class="fa fa-shopping-cart">
