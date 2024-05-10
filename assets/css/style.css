@@ -337,7 +337,7 @@ h6{
     position: relative;
     width: 100%;
     margin-bottom: 30px;
-    background: #fae5d4;;
+    background: #fae5d4;
     box-shadow: 0 0 10px 7px rgba(0, 0, 0, 0.07);
     transition: 0.4s ease;
     border-radius: 10px;
@@ -346,7 +346,7 @@ h6{
 
 
 .card .card-image {
-    height: 60%;
+    height: 33rem !important;
     position: relative;
     overflow: hidden;
     margin-left: 15px;
@@ -1325,14 +1325,131 @@ footer p{
 .fa-heart.favorite{
     color: red;
 }
+
+
+
+#contact-us{
+    color: white;
+}
+
+
+
+#contact-us .body {
+   background-color: #2222227e;
+    border-radius: 32px;
+    margin: 3rem;
+    box-shadow: 24px 24px 80px rgba(0,0,0,0.1);
+    padding: 20px 20px 28px 20px;
+    transition: 0.5s linear;
+
+}
+
+#contact-us .body:hover {
+    background-color: #90462d;
+    transform: scale(1.02);
+}
+
+
+
+
+
+#contact-us .map iframe{    
+    width: 80%;
+    border: none;
+    margin: 0 auto;
+    margin-left: 3rem;
+    
+}
+
+#contact-us form{
+    width: 80%;
+    margin: 0 auto;
+    margin-right: 4rem;
+}
+
+#contact-us form input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #fb774b;
+    border-radius: 5px;
+    background-color: #fae5d4d3 !important;
+}
+
+#contact-us form textarea{
+    border: 1px solid #fb774b;
+    border-radius: 5px;
+    background-color: #fae5d4d3 !important;
+}
+
+
   
+#contact-us .send{
+    float: right;
+    display: flex;
+    justify-content: right;
+    align-items: end;
+}
+
+#contact-us .submit{
+    background-color: #fb774b;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+#contact-us .submit:hover{
+    background-color: black;
+}
 
 
+@media screen and (max-width: 768px) {
+
+    
+
+    #contact-us .map iframe{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    #contact-us .map{
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    #contact-us form{
+        margin-top: 6rem;
+        margin: 0 auto;
+    }
+
+    #contact-us .send{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #contact-us .submit{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 10rem;
+        margin: 0 auto;
+        margin-top: 2rem;
+    }
+    
+}
 
 
 
 
     
+
+
 
 
 
