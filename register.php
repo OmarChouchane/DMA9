@@ -18,7 +18,7 @@ class RegistrationHandler {
             exit();
         } elseif (strlen($password) < 6) {
             // Check if password is less than 6 characters long
-            header('location: register.php?error=password_must_be_at_least_6_characters_long');
+            header('location: register.php?error=Password must be at least 6 characters long');
             exit();
         } else {
             // Check if the email already exists in the database
