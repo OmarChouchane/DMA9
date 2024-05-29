@@ -1,96 +1,86 @@
 <?php
 
-
 session_start();
 
 include 'server/connection.php';
 
-//if user is not logged in
-if(!isset($_SESSION['logged_in'])){
+class User {
+    private $conn;
 
-    header('location: login.php');
-    exit();
-
-}
-
-
-
-//if user logged out
-if(isset($_GET['logout'])){
-
-    unset($_SESSION['logged_in']);
-    unset($_SESSION['user_id']);
-    unset($_SESSION['user_name']);
-    unset($_SESSION['user_email']);
-    header('location: login.php');
-    exit();
-}
-
-
-
-//if user wants to change password
-if(isset($_POST['change_password'])){
-    include 'server/connection.php';
-
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirmPassword'];
-    $user_email = $_SESSION['user_email'];
-
-
-    // Check if passwords do not match
-    if($password != $confirmPassword){
-        header('location: account.php?error=passwords do not match');
+    public function __construct($conn) {
+        $this->conn = $conn;
     }
 
-
-    // Check if password is less than 6 characters long
-    else if(strlen($password) < 6){
-        header('location: account.php?error=password must be at least 6 characters long');
+    public function logout() {
+        unset($_SESSION['logged_in']);
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_name']);
+        unset($_SESSION['user_email']);
+        header('location: login.php');
+        exit();
     }
 
+    public function changePassword($password, $confirmPassword, $user_email) {
+        if ($password != $confirmPassword) {
+            header('location: account.php?error=passwords do not match');
+        } else if (strlen($password) < 6) {
+            header('location: account.php?error=password must be at least 6 characters long');
+        } else {
+            $password = md5($password);
+            $stmt = $this->conn->prepare("UPDATE users SET user_password = ? WHERE user_email = ?");
+            $stmt->bind_param('si', $password, $user_email);
 
-    // If there is no error
-    else{
-        $password = md5($password);
-        $stmt = $conn->prepare("UPDATE users SET user_password = ? WHERE user_email = ?");
-        $stmt->bind_param('si', $password, $user_email);
-
-        if($stmt->execute()){
-            header('location: account.php?message=password changed successfully');
-        }else{
-            header('location: account.php?error=error changing password');
+            if ($stmt->execute()) {
+                header('location: account.php?message=password changed successfully');
+            } else {
+                header('location: account.php?error=error changing password');
+            }
         }
     }
-
 }
 
+class Order {
+    private $conn;
 
+    public function __construct($conn) {
+        $this->conn = $conn;
+    }
 
+    public function getUserOrders($user_id) {
+        $stmt = $this->conn->prepare("SELECT * FROM orders WHERE user_id=?");
+        $stmt->bind_param('i', $user_id);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+}
 
-//get orders
+// Initialize user and order objects
+$user = new User($conn);
+$order = new Order($conn);
 
+// Check if user is logged in
+if (!isset($_SESSION['logged_in'])) {
+    header('location: login.php');
+    exit();
+}
+
+// Process logout request
+if (isset($_GET['logout'])) {
+    $user->logout();
+}
+
+// Process change password request
+if (isset($_POST['change_password'])) {
+    $user->changePassword($_POST['password'], $_POST['confirmPassword'], $_SESSION['user_email']);
+}
+
+// Get user orders
 $user_id = $_SESSION['user_id'];
+$orders = $order->getUserOrders($user_id);
 
-$stmt = $conn->prepare("SELECT * FROM orders WHERE user_id=?");
-
-$stmt->bind_param('i', $user_id);
-
-$stmt->execute();
-
-$orders = $stmt->get_result();
-
-
-
-
-
+include('layouts/header.php');
 
 ?>
-
-
-
-<?php include('layouts/header.php'); ?>
-
-
 
 
 
