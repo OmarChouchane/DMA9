@@ -1,86 +1,80 @@
 <?php
 session_start();
 
+class ShoppingCart {
+    private $cart;
+
+    public function __construct() {
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
+        }
+        $this->cart = &$_SESSION['cart'];
+    }
+
+    public function addToCart($product_id, $product_name, $product_price, $product_image, $product_quantity) {
+        if (!isset($this->cart[$product_id])) {
+            $product_array = array(
+                'product_id' => $product_id,
+                'product_name' => $product_name,
+                'product_price' => $product_price,
+                'product_image' => $product_image,
+                'product_quantity' => $product_quantity
+            );
+            $this->cart[$product_id] = $product_array;
+        } else {
+            $this->cart[$product_id]['product_quantity'] += $product_quantity;
+        }
+        $this->calculateTotalCart();
+    }
+
+    public function removeFromCart($product_id) {
+        if (isset($this->cart[$product_id])) {
+            unset($this->cart[$product_id]);
+            $this->calculateTotalCart();
+        }
+    }
+
+    public function editQuantity($product_id, $product_quantity) {
+        if (isset($this->cart[$product_id])) {
+            $this->cart[$product_id]['product_quantity'] = $product_quantity;
+            $this->calculateTotalCart();
+        }
+    }
+
+    private function calculateTotalCart() {
+        $total = 0;
+        $total_quantity = 0;
+
+        foreach ($this->cart as $key => $product) {
+            $price = $product['product_price'];
+            $quantity = $product['product_quantity'];
+
+            $total += ($price * $quantity);
+            $total_quantity += $quantity;
+        }
+
+        $_SESSION['total'] = $total;
+        $_SESSION['quantity'] = $total_quantity;
+    }
+}
+
+$shoppingCart = new ShoppingCart();
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST['add_to_cart'])) {
-        if (isset($_SESSION['cart'])) { // If cart is not empty
-            $product_array_ids = array_column($_SESSION['cart'], 'product_id');
-            if (!in_array($_POST['product_id'], $product_array_ids)) { // If product is not in cart
-                $product_id = $_POST['product_id'];
-                $product_array = array(
-                    'product_id' => $_POST['product_id'],
-                    'product_name' => $_POST['product_name'],
-                    'product_price' => $_POST['product_price'],
-                    'product_image' => $_POST['product_image'],
-                    'product_quantity' => $_POST['product_quantity']
-                );
-                $_SESSION['cart'][$product_id] = $product_array;
-            } else { // If product is already in cart
-                foreach ($_SESSION['cart'] as $key => $value) {
-                    if ($value['product_id'] == $_POST['product_id']) {
-                        $_SESSION['cart'][$key]['product_quantity'] += $_POST['product_quantity'];
-                    }
-                }
-            }
-        } else { // If cart is empty
-            $product_id = $_POST['product_id'];
-            $product_array = array(
-                'product_id' => $_POST['product_id'],
-                'product_name' => $_POST['product_name'],
-                'product_price' => $_POST['product_price'],
-                'product_image' => $_POST['product_image'],
-                'product_quantity' => $_POST['product_quantity']
-            );
-            $_SESSION['cart'][$product_id] = $product_array;
-        }
-        calculateTotalCart();
-        header("Location: cart.php"); 
-        exit(); 
-    } else if (isset($_POST['remove_product'])) { 
-        $product_id = $_POST['product_id'];
-        if (isset($_SESSION['cart'][$product_id])) {
-            unset($_SESSION['cart'][$product_id]);
-            calculateTotalCart();
-        }
+        $shoppingCart->addToCart($_POST['product_id'], $_POST['product_name'], $_POST['product_price'], $_POST['product_image'], $_POST['product_quantity']);
         header("Location: cart.php");
-        exit(); 
-    } else if (isset($_POST['edit_quantity'])) { 
-        $product_id = $_POST['product_id'];
-        $product_quantity = $_POST['product_quantity'];
-        if (isset($_SESSION['cart'][$product_id])) {
-            $_SESSION['cart'][$product_id]['product_quantity'] = $product_quantity;
-            calculateTotalCart();
-        }
-        header("Location: cart.php"); 
-        exit(); 
+        exit();
+    } else if (isset($_POST['remove_product'])) {
+        $shoppingCart->removeFromCart($_POST['product_id']);
+        header("Location: cart.php");
+        exit();
+    } else if (isset($_POST['edit_quantity'])) {
+        $shoppingCart->editQuantity($_POST['product_id'], $_POST['product_quantity']);
+        header("Location: cart.php");
+        exit();
     }
 }
-
-
-function calculateTotalCart(){
-
-    $total = 0;
-    $total_quantity = 0;
-
-    foreach($_SESSION['cart'] as $key => $value){
-
-        $product = $_SESSION['cart'][$key];
-        $price = $product['product_price'];
-        $quantity = $product['product_quantity'];
-
-        $total += ($price * $quantity);
-        $total_quantity += $quantity;
-
-    }
-
-    $_SESSION['total'] = $total;
-    $_SESSION['quantity'] = $total_quantity;
-
-}
-
-
-
-
 
 ?>
 
