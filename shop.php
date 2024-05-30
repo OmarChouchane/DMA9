@@ -209,16 +209,16 @@ if (isset($_GET['search'])) {
                         <label for="customRange">Price</label>
                         <?php
                     // Define $price variable
-                    $price = isset($_GET['price']) ? $_GET['price'] : '500';
+                    $price = isset($_GET['price']) ? $_GET['price'] : '50';
                     ?>
 
-                    <?php $price = isset($_GET['price']) ? $_GET['price'] : '500'; ?>
+                    <?php $price = isset($_GET['price']) ? $_GET['price'] : '50'; ?>
 
-                        <input type="range" class="form-range" min="1" max="1000" id="customRange" value="<?php if(isset($_GET['search'])){ echo $price;}else{ echo '500';}?>" name="price">
+                        <input type="range" class="form-range" min="1" max="100" id="customRange" value="<?php if(isset($_GET['search'])){ echo $price;}else{ echo '50';}?>" name="price">
                         <div class="range-labels">
                             <span>1</span>
-                            <span id="rangeValue"><?php if(isset($_GET['search'])){ echo $price;}else{ echo '500';}?></span>
-                            <span>1000</span>
+                            <span id="rangeValue"><?php if(isset($_GET['search'])){ echo $price;}else{ echo '50';}?></span>
+                            <span>100</span>
                         </div>
                         
                     </div>
