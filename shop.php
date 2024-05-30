@@ -163,6 +163,8 @@ if (isset($_GET['search'])) {
             background-color: orange !important;
             border: 1px solid orange !important;
         }
+
+
         
     </style>
 
@@ -256,7 +258,11 @@ if (isset($_GET['search'])) {
                 <input type="hidden" name="price" value="<?php echo $row['product_price']; ?>">
                 <input type="hidden" name="image" value="<?php echo $row['product_image']; ?>">
                 <button id="heart-button" type="submit" name="add_to_wishlist" class="active">
-                    <i class="fa fa-heart"></i>
+                    <?php if(isset($_SESSION['wishlist-product'][$row['product_id']])) { ?>
+                        <i class="fa fa-heart" style="color: red;"></i>
+                    <?php } else {?>
+                        <i class="fa fa-heart"></i>
+                    <?php } ?>
                 </button>
 
                 </form>
