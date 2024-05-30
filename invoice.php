@@ -83,7 +83,8 @@
         }
         
         table td::before {
-
+          content: attr(aria-label);
+          */
           content: attr(data-label);
           float: left;
           font-weight: bold;
@@ -111,21 +112,25 @@
                     </tr>
                 </thead>
                 <tbody>';
-    
+    $totalPrice = 0;
     if (isset($_SESSION['cart'])) {
         foreach ($_SESSION['cart'] as $key => $value) { 
+            $totalPrice += $value['product_quantity'] * $value['product_price'];
             $html .= "<tr>
                 <th scope='row'>".$value['product_id']."</th>
                 <td>".$value['product_name']."</td>
                 <td>$".$value['product_price']."</td>
                 <td  class='text-center'>".$value['product_quantity']."</td>
-                <td  class='text-center'>$".$value['product_quantity']*$value['product_price']."00</td>
+                <td  class='text-center'>$".$value['product_quantity']*$value['product_price'].".00</td>
             </tr>";
         }
     } 
     
     $html .= '</tbody>
             </table>
+            <div class="total-price">
+        <p><h2>Total Price: $' . $totalPrice . '</h2></p>
+    </div>
         </div> 
     </body>
     </html>';

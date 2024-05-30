@@ -19,6 +19,6 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
 function goTo() {
-    window.location.href = "http://localhost:8000/shop.php";
+    window.location.href = "shop.php";
 }
 
