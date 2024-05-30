@@ -1,140 +1,60 @@
-<?php 
+<?php
 
 include "server/connection.php";
 
-session_start(); 
+session_start();
 
+class ProductHandler {
+    private $conn;
 
-
-//1. determine page number
-if(isset($_GET['page_no']) && $_GET['page_no'] != ""){
-    // if user has entered a page number
-    $page_no = $_GET['page_no'];
-}else{
-    // if user has not entered a page number
-    $page_no = 1;
-
-}
-
-
-// Check if the search button is clicked
-if(isset($_GET['search'])){
-
-    if( isset($_GET['category']) && $_GET['price'] >= 0){
-
-
-        $category = $_GET['category'];
-        $price = $_GET['price'];
-
-        
-
-        $stmt = $conn->prepare("SELECT * FROM products WHERE product_category = ? AND product_price <= ?");
-
-        $stmt->bind_param("si", $category, $price);
-
-        $stmt->execute();
-
-        $products = $stmt->get_result();
-
-        $total_no_of_pages = 1;
-        
-        $category = $_GET['category'];
-        $price = $_GET['price'];
-
-        $stmt = $conn->prepare("SELECT * FROM products WHERE product_category = ? AND product_price <= ?");
-
-        $stmt->bind_param("si", $category, $price);
-
-        $stmt->execute();
-
-        $products = $stmt->get_result();
-
-        $total_records = $products->num_rows;
-
-        $total_records_per_page = 8;
-    
-        $offset = ($page_no - 1) * $total_records_per_page;
-
-        $previous_page = $page_no - 1;
-        $next_page = $page_no + 1;
-
-        $adjacent = "2";
-
-        $total_no_of_pages = ceil($total_records/$total_records_per_page);
-
-        
-    }else{
-        
-        $price = $_GET['price'];
-
-        
-
-        $stmt = $conn->prepare("SELECT * FROM products WHERE product_price <= ?");
-
-        $stmt->bind_param("i",$price);
-
-        $stmt->execute();
-
-        $products = $stmt->get_result();
-
-        $total_records = $products->num_rows;
-
-        $total_records_per_page = 8;
-    
-        $offset = ($page_no - 1) * $total_records_per_page;
-
-        $previous_page = $page_no - 1;
-        $next_page = $page_no + 1;
-
-        $adjacent = "2";
-
-        $total_no_of_pages = ceil($total_records/$total_records_per_page);
-        
-
+    public function __construct($conn) {
+        $this->conn = $conn;
     }
 
+    public function getProducts($pageNo = 1, $category = null, $maxPrice = null) {
+        $perPage = 8;
+        $offset = ($pageNo - 1) * $perPage;
 
+        if ($category !== null && $maxPrice !== null) {
+            $stmt = $this->conn->prepare("SELECT * FROM products WHERE product_category = ? AND product_price <= ? LIMIT ?, ?");
+            $stmt->bind_param("siii", $category, $maxPrice, $offset, $perPage);
+        } elseif ($maxPrice !== null) {
+            $stmt = $this->conn->prepare("SELECT * FROM products WHERE product_price <= ? LIMIT ?, ?");
+            $stmt->bind_param("iii", $maxPrice, $offset, $perPage);
+        } else {
+            $stmt = $this->conn->prepare("SELECT * FROM products LIMIT ?, ?");
+            $stmt->bind_param("ii", $offset, $perPage);
+        }
 
-// Check if the search button is not clicked
-}else{
+        $stmt->execute();
+        return $stmt->get_result();
+    }
 
-
-    //2. return page number of products
-    $stmt1 = $conn->prepare("SELECT COUNT(*) AS total_records FROM products");
-
-    $stmt1->execute();
-
-    $stmt1->bind_result($total_records);
-
-    $stmt1->store_result();
-
-    $stmt1->fetch();
-
-
-
-    //3. determine number of products per page
-    $total_records_per_page = 8;
-    
-    $offset = ($page_no - 1) * $total_records_per_page;
-
-    $previous_page = $page_no - 1;
-    $next_page = $page_no + 1;
-
-    $adjacent = "2";
-
-    $total_no_of_pages = ceil($total_records/$total_records_per_page);
-
-
-    //4. get all products  
-    $stmt2 = $conn->prepare("SELECT * FROM products LIMIT $offset, $total_records_per_page");
-    $stmt2->execute();
-    $products = $stmt2->get_result();
-    
+    public function getTotalPages() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) AS total_records FROM products");
+        $stmt->execute();
+        $stmt->bind_result($totalRecords);
+        $stmt->fetch();
+        $perPage = 8;
+        return ceil($totalRecords / $perPage);
+    }
 }
 
+$productHandler = new ProductHandler($conn);
 
+$pageNo = isset($_GET['page_no']) ? $_GET['page_no'] : 1;
+$category = isset($_GET['category']) ? $_GET['category'] : null;
+$maxPrice = isset($_GET['price']) ? $_GET['price'] : null;
 
+if (isset($_GET['search'])) {
+    $products = $productHandler->getProducts($pageNo, $category, $maxPrice);
+    $totalPages = 1; // No pagination for search results
+} else {
+    $products = $productHandler->getProducts($pageNo);
+    $totalPages = $productHandler->getTotalPages();
+}
 
+// Now $products contains the result set of products for the current page, and $totalPages contains the total number of pages.
 ?>
 
 
@@ -285,6 +205,13 @@ if(isset($_GET['search'])){
                 <div class="col-12">
                     <div class="form-group">
                         <label for="customRange">Price</label>
+                        <?php
+                    // Define $price variable
+                    $price = isset($_GET['price']) ? $_GET['price'] : '500';
+                    ?>
+
+                    <?php $price = isset($_GET['price']) ? $_GET['price'] : '500'; ?>
+
                         <input type="range" class="form-range" min="1" max="1000" id="customRange" value="<?php if(isset($_GET['search'])){ echo $price;}else{ echo '500';}?>" name="price">
                         <div class="range-labels">
                             <span>1</span>
@@ -351,24 +278,25 @@ if(isset($_GET['search'])){
         
         
             <nav aria-label="page navigation">
-                <ul class="pagination justify-content-center mt-5">
-                    <li class="page-item <?php if($page_no <= 1){echo 'disabled';} ?>">
-                        <a class="page-link" href="<?php if($page_no <= 1){echo '#';}else{ echo '?page_no='.($page_no-1);} ?>">Previous</a>
-                    </li>
-                    <li class="page-item <?php if($page_no == 1){echo 'active';}if($total_no_of_pages == 0){echo 'disabled';} ?>"><a class="page-link" href="?page_no=1">1</a></li>
-                    <li class="page-item <?php if($page_no == 2){echo 'active';}if($total_no_of_pages < 2){echo 'disabled';} ?>" aria-current="page">
-                        <a class="page-link" href="?page_no=2">2</a>
-                    </li>
-                    <?php if($total_no_of_pages > 2){ ?>
-                        <li class="page-item"><a class="page-link" href="#">...</a></li>
-                        <li class="page-item <?php if($page_no > 2){ echo 'active'; }?>"><a class="page-link" href="<?php if($page_no < 3){ echo '?page_no=3'; }else{ echo '?page_no='.$page_no; }?>">
-                            <?php if($page_no < 3){ echo 3; }else{ echo $page_no; } ?></a></li>
-                    <?php } ?>
-                    <li class="page-item <?php if($page_no >= $total_no_of_pages){echo 'disabled';} ?>">
-                        <a class="page-link" href="<?php if($page_no >= $total_no_of_pages){echo '#';}else{ echo '?page_no='.($page_no+1);} ?>">Next</a>
-                    </li>
-                </ul>
-            </nav>
+    <ul class="pagination justify-content-center mt-5">
+        <li class="page-item <?php if($pageNo <= 1){echo 'disabled';} ?>">
+            <a class="page-link" href="<?php if($pageNo <= 1){echo '#';}else{ echo '?page_no='.($pageNo-1);} ?>">Previous</a>
+        </li>
+        <li class="page-item <?php if($pageNo == 1){echo 'active';}if($totalPages == 0){echo 'disabled';} ?>"><a class="page-link" href="?page_no=1">1</a></li>
+        <li class="page-item <?php if($pageNo == 2){echo 'active';}if($totalPages < 2){echo 'disabled';} ?>" aria-current="page">
+            <a class="page-link" href="?page_no=2">2</a>
+        </li>
+        <?php if($totalPages > 2){ ?>
+            <li class="page-item"><a class="page-link" href="#">...</a></li>
+            <li class="page-item <?php if($pageNo > 2){ echo 'active'; }?>"><a class="page-link" href="<?php if($pageNo < 3){ echo '?page_no=3'; }else{ echo '?page_no='.$pageNo; }?>">
+                <?php if($pageNo < 3){ echo 3; }else{ echo $pageNo; } ?></a></li>
+        <?php } ?>
+        <li class="page-item <?php if($pageNo >= $totalPages){echo 'disabled';} ?>">
+            <a class="page-link" href="<?php if($pageNo >= $totalPages){echo '#';}else{ echo '?page_no='.($pageNo+1);} ?>">Next</a>
+        </li>
+    </ul>
+</nav>
+
 
         </div>
     </section>
