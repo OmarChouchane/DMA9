@@ -80,6 +80,12 @@ if(!isset($_SESSION['admin_logged_in'])){
         <p style="color:green;font-weight: 500;" class="text-center">
                 <?php if(isset($_GET['order_edit_success'])){ echo $_GET['order_edit_success'];}?>
         </p>
+        <p style="color:red;font-weight: 500;" class="text-center">
+                <?php if(isset($_GET['delete_error'])){ echo $_GET['delete_error'];}?>
+        </p>
+        <p style="color:green;font-weight: 500;" class="text-center">
+                <?php if(isset($_GET['delete_success'])){ echo $_GET['delete_success'];}?>
+        </p>
 
     </div>
         <h2>DASHBOARD</h2>
@@ -117,7 +123,7 @@ if(!isset($_SESSION['admin_logged_in'])){
             <td><?php echo $order['user_phone']; ?></td>
             <td><?php echo $order['user_address']; ?></td>
             <td><a href="edit_order.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-primary">Edit</a></td>
-            <td><a href="edit_order.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-danger">Delete</a></td>
+            <td><a href="delete_order.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-danger">Delete</a></td>
             </tr>
 
         <?php } ?>
