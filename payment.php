@@ -16,7 +16,7 @@ class PaymentHandler {
             $total = $_SESSION['total'];
             return "<p>Total payment : $$total</p><input class='button' type='submit' value='Pay Now'>";
         } elseif ($this->orderStatus == "not paid") {
-            return "<p>Total payment : $${this->totalOrderPrice}</p><input class='button' type='submit' value='Pay Now'>";
+            return "<p>Total payment : {$this->totalOrderPrice}</p><input class='button' type='submit' value='Pay Now'>";
         } else {
             return "<p>You don't have an order to pay</p>";
         }
