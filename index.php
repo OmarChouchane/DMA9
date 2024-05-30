@@ -148,7 +148,7 @@ session_start();
                     <div class="row m-5 pt-5">
                     
 
-                    <?php  include('server/get_coats.php');  ?>
+                    <?php  include('server/get_sandwiches.php');  ?>
 
                     <?php  while($row=$coats_products->fetch_assoc()){  ?>
 
@@ -189,7 +189,7 @@ session_start();
                 <div class="container">
                     <div class="row m-5 pt-5">
 
-                    <?php  include('server/get_shoes.php');  ?>
+                    <?php  include('server/get_burgers.php');  ?>
 
                     <?php  while($row=$shoes->fetch_assoc()){  ?>
 
@@ -227,7 +227,7 @@ session_start();
                 <div class="container">
                     <div class="row m-5 pt-5">
 
-                    <?php  include('server/get_watches.php');  ?>
+                    <?php  include('server/get_fries.php');  ?>
 
                     <?php  while($row=$watches->fetch_assoc()){  ?>
 
@@ -337,7 +337,7 @@ session_start();
 
         <script>
           AOS.init();
-}
+
         </script>
 
 

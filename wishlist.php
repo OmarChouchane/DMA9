@@ -16,12 +16,20 @@ if(isset($_POST['delete'])){
     $delete_wishlist_item = $conn->prepare("DELETE FROM `wishlist` WHERE wishlist_id = ?");
     $delete_wishlist_item->bind_param("i", $wishlist_id); // Bind parameter
     $delete_wishlist_item->execute();
+    if (isset($_POST['pid'])) {
+        unset($_SESSION['wishlist-product'][$pid]);
+    } else {
+        unset($_SESSION['wishlist-product']);
+    }
+    
 }
 
 if(isset($_GET['delete_all'])){
     $delete_wishlist_item = $conn->prepare("DELETE FROM `wishlist` WHERE user_id = ?");
     $delete_wishlist_item->bind_param("i", $user_id); // Bind parameter
     $delete_wishlist_item->execute();
+    unset($_SESSION['wishlist-product']);
+    $_SESSION['wishlist_item_count'] = 0;
     header('location:wishlist.php');
     exit(); // Exit to prevent further execution
 }
@@ -34,8 +42,8 @@ if(isset($_GET['delete_all'])){
     $count_result = $count_wishlist_query->get_result();
     $count_row = $count_result->fetch_assoc();
     $count_wishlist_items = $count_row['count'];
-    //echo ''. $count_wishlist_items .'';
     $_SESSION['wishlist_item_count'] = $count_wishlist_items;
+    
 }
 
 
@@ -66,16 +74,23 @@ if(isset($_POST['add_to_wishlist'])){
     $check_wishlist->execute();
     $result = $check_wishlist->get_result();
     if($result->num_rows > 0){
-        $message = 'This product is already in your wishlist!';
-        header('location:shop.php?This product is already in your wishlist!');
+        // Remove the product from the wishlist
+        $delete_wishlist = $conn->prepare("DELETE FROM `wishlist` WHERE product_name = ? AND user_id = ?");
+        $delete_wishlist->bind_param("si", $name, $user_id); // Bind parameters
+        $delete_wishlist->execute();
+        $message = 'Product removed from your wishlist!';
+        unset($_SESSION['wishlist-product'][$pid]);
+        $_SESSION['wishlist_item_count'] -= 1;
+        header('location:shop.php?Product removed from your wishlist!!');
         
-       
     }else{
         // Insert the product into the wishlist
         $insert_wishlist = $conn->prepare("INSERT INTO `wishlist`(user_id, product_id, product_name, product_price, product_image) VALUES(?,?,?,?,?)");
         $insert_wishlist->bind_param("issss", $user_id, $pid, $name, $price, $image); // Bind parameters
         $insert_wishlist->execute();
         $message = 'Product added to your wishlist!';
+        $_SESSION['wishlist-product'][$pid] = true;
+        $_SESSION['wishlist_item_count'] += 1;
         header('location:shop.php?Product added to your wishlist!!');
 
         
@@ -126,7 +141,7 @@ if(isset($_POST['add_to_wishlist'])){
                 <?php
             }
         } else {
-            echo '<p class="empty">Your wishlist is empty</p>';
+            echo '<h3 class="empty my-5 py-5">Your wishlist is empty</h3>';
         }
         ?>
     </div>
