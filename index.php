@@ -337,7 +337,7 @@ session_start();
 
         <script>
           AOS.init();
-}
+
         </script>
 
 
