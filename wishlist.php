@@ -141,7 +141,7 @@ if(isset($_POST['add_to_wishlist'])){
                 <?php
             }
         } else {
-            echo '<p class="empty">Your wishlist is empty</p>';
+            echo '<h3 class="empty my-5 py-5">Your wishlist is empty</h3>';
         }
         ?>
     </div>
