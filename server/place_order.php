@@ -68,7 +68,7 @@ class OrderHandler {
                 // Empty the cart --> delay until payment is done
 
                 // Inform the user that the order is placed successfully
-                header('location: ../payement.php?order_status=order_placed');
+                header('location: ../payment.php?order_status=order_placed');
             }
         }
     }
