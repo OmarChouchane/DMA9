@@ -13,7 +13,7 @@ class OrderHandler {
     public function placeOrder() {
         // Check if user is not logged in
         if (!isset($_SESSION['logged_in'])) {
-            header('location: ../checkout.php?message=fail');
+            header('location: ../login.php?message=fail');
             exit();
         } else {
             // Check if the place_order form is submitted
@@ -74,7 +74,8 @@ class OrderHandler {
 
                 // Inform the user that the order is placed successfully
                 header('location: ../payment.php?message=order placed');
-            }
+            }else{
+                header('location: ../index.php?error=order_failed');
         }
     }
 }
