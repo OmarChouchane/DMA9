@@ -66,9 +66,14 @@ class OrderHandler {
                 }
 
                 // Empty the cart --> delay until payment is done
+                unset($_SESSION['cart']);
+                unset($_SESSION['quantity']);
+                unset($_SESSION['total']);
+
+
 
                 // Inform the user that the order is placed successfully
-                header('location: ../payment.php?order_status=order_placed');
+                header('location: ../payment.php?message=order placed');
             }
         }
     }
