@@ -1,102 +1,92 @@
 <?php
 
-
 session_start();
 
 include 'server/connection.php';
 
-//if user is not logged in
-if(!isset($_SESSION['logged_in'])){
+class AccountManager {
+    private $conn;
 
-    header('location: login.php');
-    exit();
-
-}
-
-
-
-//if user logged out
-if(isset($_GET['logout'])){
-
-    unset($_SESSION['logged_in']);
-    unset($_SESSION['user_id']);
-    unset($_SESSION['user_name']);
-    unset($_SESSION['user_email']);
-    header('location: login.php');
-    exit();
-}
-
-
-
-//if user wants to change password
-if(isset($_POST['change_password'])){
-    include 'server/connection.php';
-
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirmPassword'];
-    $user_email = $_SESSION['user_email'];
-
-
-    // Check if passwords do not match
-    if($password != $confirmPassword){
-        header('location: account.php?error=passwords do not match');
+    public function __construct($conn) {
+        $this->conn = $conn;
     }
 
-
-    // Check if password is less than 6 characters long
-    else if(strlen($password) < 6){
-        header('location: account.php?error=password must be at least 6 characters long');
+    public function isLoggedIn() {
+        return isset($_SESSION['logged_in']);
     }
 
+    public function logout() {
+        unset($_SESSION['logged_in']);
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_name']);
+        unset($_SESSION['user_email']);
+        header('location: login.php');
+        exit();
+    }
 
-    // If there is no error
-    else{
-        $password = md5($password);
-        $stmt = $conn->prepare("UPDATE users SET user_password = ? WHERE user_email = ?");
-        $stmt->bind_param('si', $password, $user_email);
+    public function changePassword($password, $confirmPassword, $userEmail) {
+        if ($password != $confirmPassword) {
+            header('location: account.php?error=passwords do not match');
+        } else if (strlen($password) < 6) {
+            header('location: account.php?error=password must be at least 6 characters long');
+        } else {
+            $password = md5($password);
+            $stmt = $this->conn->prepare("UPDATE users SET user_password = ? WHERE user_email = ?");
+            $stmt->bind_param('si', $password, $userEmail);
 
-        if($stmt->execute()){
-            header('location: account.php?message=password changed successfully');
-        }else{
-            header('location: account.php?error=error changing password');
+            if ($stmt->execute()) {
+                header('location: account.php?message=password changed successfully');
+            } else {
+                header('location: account.php?error=error changing password');
+            }
         }
     }
 
+    // Add other account-related methods as needed
 }
 
+class OrderManager {
+    private $conn;
 
+    public function __construct($conn) {
+        $this->conn = $conn;
+    }
 
+    public function getOrders($userId) {
+        $stmt = $this->conn->prepare("SELECT * FROM orders WHERE user_id=?");
+        $stmt->bind_param('i', $userId);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+}
 
-//get orders
+$accountManager = new AccountManager($conn);
+$orderManager = new OrderManager($conn);
 
-$user_id = $_SESSION['user_id'];
+if (!$accountManager->isLoggedIn()) {
+    header('location: login.php');
+    exit();
+}
 
-$stmt = $conn->prepare("SELECT * FROM orders WHERE user_id=?");
+if (isset($_GET['logout'])) {
+    $accountManager->logout();
+}
 
-$stmt->bind_param('i', $user_id);
+if (isset($_POST['change_password'])) {
+    $accountManager->changePassword($_POST['password'], $_POST['confirmPassword'], $_SESSION['user_email']);
+}
 
-$stmt->execute();
+$userId = $_SESSION['user_id'];
+$orders = $orderManager->getOrders($userId);
 
-$orders = $stmt->get_result();
-
-
-
-
-
-
+// HTML rendering starts here
 ?>
-
-
 
 <?php include('layouts/header.php'); ?>
 
-
-
-
-
-    <!--Account-->
-    <section class="my-5 py-5">
-        <div class="row container mx-auto">
+<section class="my-5 py-5">
+    <!-- Account info -->
+    <div class="row container mx-auto">
             <?php if(isset($_GET['register'])){?>
                 <p class="text-center pt-3" style="color: green;"><?php echo $_GET['register']; ?></p>
             <?php } ?>
@@ -137,15 +127,11 @@ $orders = $stmt->get_result();
                 </form>
             </div>
         </div>
-    </section>
+</section>
 
-
-
-
-
-    <!--Orders-->
-    <section id="orders" class="orders container my-5 py-5" class="">
-        <div class="container text-center">
+<section id="orders" class="orders container my-5 py-5">
+    <!-- Orders -->
+    <div class="container text-center">
             <h2 class="font-weight-bold">Your Orders</h2>
             <hr class="mx-auto">
         </div>
@@ -186,11 +172,6 @@ $orders = $stmt->get_result();
             <?php } ?>
 
         </table>
-
-    </section>
-
-
-
-
+</section>
 
 <?php include('layouts/footer.php'); ?>
